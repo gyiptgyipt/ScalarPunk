@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/RobotFace.dir/RobotFace_autogen/mocs_compilation.cpp.o CMakeFiles/RobotFace.dir/main.cpp.o CMakeFiles/RobotFace.dir/mainwindow.cpp.o CMakeFiles/RobotFace.dir/EyesWidget.cpp.o -o RobotFace  /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.3 /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.3 /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.3 

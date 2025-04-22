@@ -1,0 +1,4 @@
+/home/zyme/VectorEyes/build/CMakeFiles/RobotFace.dir
+/home/zyme/VectorEyes/build/CMakeFiles/edit_cache.dir
+/home/zyme/VectorEyes/build/CMakeFiles/rebuild_cache.dir
+/home/zyme/VectorEyes/build/CMakeFiles/RobotFace_autogen.dir
