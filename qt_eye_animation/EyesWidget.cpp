@@ -38,9 +38,9 @@ void RobotEyes::startBlink() {
 }
 
 void RobotEyes::runHappyEyes() {
-    happyMode = true;
+    smileMode = true;
     QTimer::singleShot(1000, [this]() {
-        happyMode = false;
+        smileMode = false;
     });
 }
 
@@ -56,7 +56,7 @@ void RobotEyes::updateAnimation() {
     // Animate "Zzz" rising effect
     if (isSleeping) {
         zzzY -= 0.5f;             // Move upward
-        zzzOpacity -= 0.01f;      // Fade out
+        zzzOpacity -= 0.005f;      // Fade out
 
         // Reset loop when it fades away
         if (zzzOpacity <= 0.0f) {
@@ -139,7 +139,7 @@ QRectF rightEye(leftX + leftEyeWidth + spacing, topY, rightEyeWidth, eyeHeight);
     auto drawEye = [&](const QRectF &rect) {
         p.setBrush(QColor(255, 215, 0)); // Gold color
         p.setPen(Qt::black);
-        p.drawRoundedRect(rect, 60, 60); // Rounded corners with radius 15
+        p.drawRoundedRect(rect, 60, 60); // Rounded corners with radius 60
 
         // Blink effect
         if (blinkAmount > 0.0f) {
@@ -150,16 +150,27 @@ QRectF rightEye(leftX + leftEyeWidth + spacing, topY, rightEyeWidth, eyeHeight);
         }
 
         // Happy overlay
-        if (happyMode) {
-            QPointF left = rect.bottomLeft();
-            QPointF right = rect.bottomRight();
-            QPointF tip = QPointF(rect.center().x(), rect.bottom() - rect.height() * 0.4);
-            p.setBrush(Qt::black);
-            QPolygonF poly;
-            poly << left << right << tip;
-            p.drawPolygon(poly);
-        }
-    };
+        // if (smileMode) {
+        //     QPointF left = rect.bottomLeft();
+        //     QPointF right = rect.bottomRight();
+        //     QPointF tip = QPointF(rect.center().x(), rect.bottom() - rect.height() * 0.4);
+        //     p.setBrush(Qt::black);
+        //     QPolygonF poly;
+        //     poly << left << right << tip;
+        //     p.drawPolygon(poly);
+        // }
+
+        if (smileMode) {
+        QRectF mouthRect = QRectF(
+            rect.left(), 
+            rect.bottom() - rect.height() * 0.4,  // adjust height/position for mouth
+            rect.width(), 
+            rect.height() * 0.4                   // thickness of the mouth
+        );
+        p.setBrush(Qt::black);
+        p.drawRect(mouthRect);
+    }
+};
 
     drawEye(leftEye);
     drawEye(rightEye);
@@ -199,4 +210,5 @@ void RobotEyes::wakeUp() {
 void RobotEyes::nextAnimation() {
     animations[animationIndex % animations.size()]();
     animationIndex++;
+    
 }

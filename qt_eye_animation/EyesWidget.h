@@ -59,12 +59,12 @@ private:
     float blinkProgress = 0.0f;
     bool isBlinking = false;
     bool isSleeping = false;
-    bool happyMode = false;
+    bool smileMode = false;
 
     float eyeOffset = 0.0f;
     float eyeSquash = 0.0f;  // negative for left shrink, positive for right shrink
 
-    float zzzY = 0.0f; //sleeping parameter
+    float zzzY = 1.0f; //sleeping parameter text height(class ထဲ ၀င်ပြင်ရန်)
     float zzzOpacity = 1.0f;
 
 
