@@ -84,8 +84,24 @@ float eyeHeight = h * 0.5f;
 float spacing = w * 0.05f;
 float squashFactor = 0.15f; // adjust for how much to stretch/shrink
 
-float leftScale = (eyeSquash == 1) ? (1.0f - squashFactor) : (eyeSquash == -1 ? 1.0f + squashFactor : 1.0f);
-float rightScale = (eyeSquash == -1) ? (1.0f - squashFactor) : (eyeSquash == 1 ? 1.0f + squashFactor : 1.0f);
+float leftScale, rightScale;
+
+    if (eyeSquash == -1) {
+        leftScale = 1.0f - squashFactor;
+    } else if (eyeSquash == 1) {
+        leftScale = 1.0f + squashFactor;
+    } else {
+        leftScale = 1.0f;
+    }
+
+    if (eyeSquash == 1) {
+        rightScale = 1.0f - squashFactor;
+    } else if (eyeSquash == -1) {
+        rightScale = 1.0f + squashFactor;
+    } else {
+        rightScale = 1.0f;
+    }
+
 
 float leftEyeWidth = eyeWidth * leftScale;
 float rightEyeWidth = eyeWidth * rightScale;
