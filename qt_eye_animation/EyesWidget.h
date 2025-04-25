@@ -48,6 +48,8 @@ private slots:
     void runHappyEyes();
     void lookLeft();
     void lookRight();
+    void wakeUp();
+    void goToSleep();
 
 private:
     QTimer updateTimer;
@@ -61,6 +63,10 @@ private:
 
     float eyeOffset = 0.0f;
     float eyeSquash = 0.0f;  // negative for left shrink, positive for right shrink
+
+    float zzzY = 0.0f; //sleeping parameter
+    float zzzOpacity = 1.0f;
+
 
 
 
