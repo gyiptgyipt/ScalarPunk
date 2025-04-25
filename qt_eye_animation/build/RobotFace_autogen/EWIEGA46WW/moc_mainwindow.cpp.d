@@ -1,5 +1,5 @@
-/home/zyme/VectorEyes/build/RobotFace_autogen/EWIEGA46WW/moc_mainwindow.cpp: /home/zyme/VectorEyes/mainwindow.h \
-  /home/zyme/VectorEyes/build/RobotFace_autogen/moc_predefs.h \
+/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/RobotFace_autogen/EWIEGA46WW/moc_mainwindow.cpp: /home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/mainwindow.h \
+  /home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/RobotFace_autogen/moc_predefs.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
   /usr/include/assert.h \

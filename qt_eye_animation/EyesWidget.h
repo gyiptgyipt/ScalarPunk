@@ -1,4 +1,33 @@
-#pragma once
+// #pragma once
+
+// #include <QWidget>
+// #include <QTimer>
+// #include <QPointF>
+
+// class RobotEyes : public QWidget {
+//     Q_OBJECT
+
+// public:
+//     RobotEyes(QWidget *parent = nullptr);
+
+// protected:
+//     void paintEvent(QPaintEvent *event) override;
+
+// private:
+//     QTimer blinkTimer;
+//     QTimer updateTimer;
+
+//     bool isBlinking = false;
+//     float blinkProgress = 0.0f;
+//     QPointF pupilOffset;
+
+//     void startBlink();
+//     void updateAnimation();
+// };
+
+
+#ifndef EYESWIDGET_H
+#define EYESWIDGET_H
 
 #include <QWidget>
 #include <QTimer>
@@ -13,14 +42,29 @@ public:
 protected:
     void paintEvent(QPaintEvent *event) override;
 
-private:
-    QTimer blinkTimer;
-    QTimer updateTimer;
-
-    bool isBlinking = false;
-    float blinkProgress = 0.0f;
-    QPointF pupilOffset;
-
-    void startBlink();
+private slots:
     void updateAnimation();
+    void startBlink();
+    void runHappyEyes();
+    void runSaccade();
+
+private:
+    QTimer updateTimer;
+    QTimer blinkTimer;
+    QTimer actionTimer;
+
+    float blinkProgress = 0.0f;
+    bool isBlinking = false;
+    bool isSleeping = false;
+    bool happyMode = false;
+
+    QPointF pupilOffset;
+    float pupilWiggleRadius = 3.0f;
+
+    int animationIndex = 0;
+    QList<std::function<void()>> animations;
+
+    void nextAnimation();
 };
+
+#endif // EYESWIDGET_H

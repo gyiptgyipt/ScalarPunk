@@ -1,4 +1,4 @@
-# Install script for directory: /home/zyme/VectorEyes
+# Install script for directory: /home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/zyme/VectorEyes/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

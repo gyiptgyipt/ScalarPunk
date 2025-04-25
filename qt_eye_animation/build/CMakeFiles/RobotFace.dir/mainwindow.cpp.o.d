@@ -1,6 +1,7 @@
 CMakeFiles/RobotFace.dir/mainwindow.cpp.o: \
- /home/zyme/VectorEyes/mainwindow.cpp /usr/include/stdc-predef.h \
- /home/zyme/VectorEyes/mainwindow.h \
+ /home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/mainwindow.cpp \
+ /usr/include/stdc-predef.h \
+ /home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/mainwindow.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QMainWindow \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qmainwindow.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtwidgetsglobal.h \
@@ -270,7 +271,7 @@ CMakeFiles/RobotFace.dir/mainwindow.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qkeysequence.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtabwidget.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qicon.h \
- /home/zyme/VectorEyes/build/RobotFace_autogen/include/./ui_mainwindow.h \
+ /home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/RobotFace_autogen/include/./ui_mainwindow.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QVariant \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qvariant.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qmap.h \

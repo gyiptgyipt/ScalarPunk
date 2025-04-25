@@ -1,6 +1,7 @@
 CMakeFiles/RobotFace.dir/EyesWidget.cpp.o: \
- /home/zyme/VectorEyes/EyesWidget.cpp /usr/include/stdc-predef.h \
- /home/zyme/VectorEyes/EyesWidget.h \
+ /home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/EyesWidget.cpp \
+ /usr/include/stdc-predef.h \
+ /home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/EyesWidget.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QWidget \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qwidget.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtwidgetsglobal.h \

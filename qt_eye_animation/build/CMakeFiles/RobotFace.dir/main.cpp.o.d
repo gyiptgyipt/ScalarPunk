@@ -1,4 +1,5 @@
-CMakeFiles/RobotFace.dir/main.cpp.o: /home/zyme/VectorEyes/main.cpp \
+CMakeFiles/RobotFace.dir/main.cpp.o: \
+ /home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/main.cpp \
  /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QApplication \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qapplication.h \
@@ -241,7 +242,7 @@ CMakeFiles/RobotFace.dir/main.cpp.o: /home/zyme/VectorEyes/main.cpp \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qmap.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qhash.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qshareddata.h \
- /home/zyme/VectorEyes/EyesWidget.h \
+ /home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/EyesWidget.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QWidget \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qwidget.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qpaintdevice.h \
