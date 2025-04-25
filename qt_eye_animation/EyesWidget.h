@@ -46,7 +46,7 @@ private slots:
     void updateAnimation();
     void startBlink();
     void runHappyEyes();
-    void runSaccade();
+    // void runSaccade();
 
 private:
     QTimer updateTimer;
@@ -58,8 +58,8 @@ private:
     bool isSleeping = false;
     bool happyMode = false;
 
-    QPointF pupilOffset;
-    float pupilWiggleRadius = 3.0f;
+    // QPointF pupilOffset;
+    // float pupilWiggleRadius = 3.0f;
 
     int animationIndex = 0;
     QList<std::function<void()>> animations;

@@ -19,7 +19,7 @@ RobotEyes::RobotEyes(QWidget *parent) : QWidget(parent) {
     animations = {
         [&]() { isSleeping = false; blinkProgress = 0; },        // Wakeup
         [&]() { startBlink(); },                                 // Blink
-        [&]() { runSaccade(); },                                 // Saccade
+        // [&]() { runSaccade(); },                                 // Saccade
         [&]() { runHappyEyes(); },                               // Happy eyes
         [&]() { isSleeping = true; }                             // Sleep
     };
@@ -37,16 +37,16 @@ void RobotEyes::runHappyEyes() {
     });
 }
 
-void RobotEyes::runSaccade() {
-    float angle = QRandomGenerator::global()->bounded(360.0f);
-    float radius = 10.0f;
-    pupilOffset = QPointF(qCos(qDegreesToRadians(angle)) * radius,
-                          qSin(qDegreesToRadians(angle)) * radius);
+// void RobotEyes::runSaccade() {
+//     float angle = QRandomGenerator::global()->bounded(360.0f);
+//     float radius = 10.0f;
+//     pupilOffset = QPointF(qCos(qDegreesToRadians(angle)) * radius,
+//                           qSin(qDegreesToRadians(angle)) * radius);
 
-    QTimer::singleShot(200, [this]() {
-        pupilOffset = QPointF(0, 0);
-    });
-}
+//     QTimer::singleShot(200, [this]() {
+//         pupilOffset = QPointF(0, 0);
+//     });
+// }
 
 void RobotEyes::updateAnimation() {
     if (isBlinking) {
@@ -59,10 +59,10 @@ void RobotEyes::updateAnimation() {
 
     if (!isSleeping && !isBlinking) {
         // Subtle movement (pupil wiggle)
-        float angle = QRandomGenerator::global()->bounded(360.0f);
-        float radius = QRandomGenerator::global()->bounded(pupilWiggleRadius);
-        pupilOffset = QPointF(qCos(qDegreesToRadians(angle)) * radius,
-                              qSin(qDegreesToRadians(angle)) * radius);
+        // float angle = QRandomGenerator::global()->bounded(360.0f);
+        // float radius = QRandomGenerator::global()->bounded(pupilWiggleRadius);
+        // pupilOffset = QPointF(qCos(qDegreesToRadians(angle)) * radius,
+        //                       qSin(qDegreesToRadians(angle)) * radius);
     }
 
     update();
@@ -81,24 +81,24 @@ void RobotEyes::paintEvent(QPaintEvent *) {
     float blinkAmount = isSleeping ? 1.0f : (isBlinking ? qMin(1.0f, blinkProgress * 2.0f) : 0.0f);
 
     auto drawEye = [&](const QRectF &rect) {
-        p.setBrush(Qt::white);
+        p.setBrush(QColor(255, 215, 0));
         p.setPen(Qt::black);
         p.drawRect(rect);
 
         QPointF center = rect.center();
-        QPointF pupilCenter = center + pupilOffset;
+        // QPointF pupilCenter = center + pupilOffset;
 
         // Draw gold rectangular pupil
         QSizeF pupilSize(20, 20);  // you can tweak the size here
-        QRectF pupilRect(pupilCenter - QPointF(pupilSize.width() / 2, pupilSize.height() / 2), pupilSize);
+        // QRectF pupilRect(pupilCenter - QPointF(pupilSize.width() / 2, pupilSize.height() / 2), pupilSize);
         p.setBrush(QColor(255, 215, 0));  // gold color
         p.setPen(Qt::NoPen);
-        p.drawRect(pupilRect);
+        // p.drawRect(pupilRect);
 
         // Blink effect
         if (blinkAmount > 0.0f) {
             QRectF lid(rect.left(), rect.top(), rect.width(), rect.height() * blinkAmount);
-            p.setBrush(QColor(30, 30, 30));
+            p.setBrush(QColor(0, 0, 0));
             p.setPen(Qt::NoPen);
             p.drawRect(lid);
         }
