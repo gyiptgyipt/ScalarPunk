@@ -19,6 +19,8 @@ RobotEyes::RobotEyes(QWidget *parent) : QWidget(parent) {
         [&]() { isSleeping = false; blinkProgress = 0; },  // Wakeup
         [&]() { startBlink(); },                           // Blink
         [&]() { runHappyEyes(); },                         // Happy eyes
+        [&]() { lookLeft(); },
+        [&]() { lookRight(); },
         [&]() { isSleeping = true; }                       // Sleep
     };
 }
@@ -58,14 +60,16 @@ void RobotEyes::paintEvent(QPaintEvent *) {
     int w = width();
     int h = height();
     
-    // Eye size: 1/4 of widget width, height proportional
+    // Spacing and positions
+    float spacing = w * 0.05f; // space between eyes
     float eyeWidth = w * 0.25f;
     float eyeHeight = h * 0.5f;
 
-    // Spacing and positions
-    float spacing = w * 0.05f; // space between eyes
-    float leftX = (w - (2 * eyeWidth + spacing)) / 2.0f;
+    float leftX = (w - (2 * eyeWidth + spacing)) / 2.0f + eyeOffset;
     float topY = (h - eyeHeight) / 2.0f;
+
+    
+   
 
     QRectF leftEye(leftX, topY, eyeWidth, eyeHeight);
     QRectF rightEye(leftX + eyeWidth + spacing, topY, eyeWidth, eyeHeight);
@@ -99,6 +103,21 @@ void RobotEyes::paintEvent(QPaintEvent *) {
 
     drawEye(leftEye);
     drawEye(rightEye);
+}
+
+
+void RobotEyes::lookLeft() {
+    eyeOffset = -20;  // shift eyes to the left
+    QTimer::singleShot(500, [this]() {
+        eyeOffset = 0;
+    });
+}
+
+void RobotEyes::lookRight() {
+    eyeOffset = 20;   // shift eyes to the right
+    QTimer::singleShot(500, [this]() {
+        eyeOffset = 0;
+    });
 }
 
 
