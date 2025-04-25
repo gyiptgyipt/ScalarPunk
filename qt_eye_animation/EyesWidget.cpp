@@ -83,7 +83,7 @@ void RobotEyes::paintEvent(QPaintEvent *) {
     auto drawEye = [&](const QRectF &rect) {
         p.setBrush(Qt::white);
         p.setPen(Qt::black);
-        p.drawEllipse(rect);
+        p.drawRect(rect);
 
         QPointF center = rect.center();
         QPointF pupilCenter = center + pupilOffset;
