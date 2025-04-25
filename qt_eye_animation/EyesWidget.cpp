@@ -58,21 +58,27 @@ void RobotEyes::paintEvent(QPaintEvent *) {
 
     // Dynamic sizing based on widget size
     int w = width();
-    int h = height();
-    
-    // Spacing and positions
-    float spacing = w * 0.05f; // space between eyes
-    float eyeWidth = w * 0.25f;
-    float eyeHeight = h * 0.5f;
+int h = height();
 
-    float leftX = (w - (2 * eyeWidth + spacing)) / 2.0f + eyeOffset;
-    float topY = (h - eyeHeight) / 2.0f;
+float eyeWidth = w * 0.25f;
+float eyeHeight = h * 0.5f;
+float spacing = w * 0.05f;
+float squashFactor = 0.15f; // adjust for how much to stretch/shrink
 
-    
-   
+float leftScale = (eyeSquash == 1) ? (1.0f - squashFactor) : (eyeSquash == -1 ? 1.0f + squashFactor : 1.0f);
+float rightScale = (eyeSquash == -1) ? (1.0f - squashFactor) : (eyeSquash == 1 ? 1.0f + squashFactor : 1.0f);
 
-    QRectF leftEye(leftX, topY, eyeWidth, eyeHeight);
-    QRectF rightEye(leftX + eyeWidth + spacing, topY, eyeWidth, eyeHeight);
+float leftEyeWidth = eyeWidth * leftScale;
+float rightEyeWidth = eyeWidth * rightScale;
+
+// Recompute spacing to center everything nicely
+float totalWidth = leftEyeWidth + rightEyeWidth + spacing;
+float leftX = (w - totalWidth) / 2.0f + eyeOffset;
+float topY = (h - eyeHeight) / 2.0f;
+
+QRectF leftEye(leftX, topY, leftEyeWidth, eyeHeight);
+QRectF rightEye(leftX + leftEyeWidth + spacing, topY, rightEyeWidth, eyeHeight);
+
 
     float blinkAmount = isSleeping ? 1.0f : (isBlinking ? qMin(1.0f, blinkProgress * 2.0f) : 0.0f);
 
@@ -105,18 +111,23 @@ void RobotEyes::paintEvent(QPaintEvent *) {
     drawEye(rightEye);
 }
 
-
 void RobotEyes::lookLeft() {
-    eyeOffset = -20;  // shift eyes to the left
-    QTimer::singleShot(500, [this]() {
+    eyeOffset = -100;
+    eyeSquash = qBound(-1.0f, eyeOffset / 100.0f, 1.0f);
+
+    QTimer::singleShot(2000, [this]() {
         eyeOffset = 0;
+        eyeSquash = 0;
     });
 }
 
 void RobotEyes::lookRight() {
-    eyeOffset = 20;   // shift eyes to the right
-    QTimer::singleShot(500, [this]() {
+    eyeOffset = 100;
+    eyeSquash = qBound(-1.0f, eyeOffset / 100.0f, 1.0f);
+
+    QTimer::singleShot(2000, [this]() {
         eyeOffset = 0;
+        eyeSquash = 0;
     });
 }
 

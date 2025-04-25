@@ -60,6 +60,8 @@ private:
     bool happyMode = false;
 
     float eyeOffset = 0.0f;
+    float eyeSquash = 0.0f;  // negative for left shrink, positive for right shrink
+
 
 
     // QPointF pupilOffset;
