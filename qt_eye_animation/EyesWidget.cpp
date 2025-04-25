@@ -188,12 +188,12 @@ if (isAngry) {
     if (angryScale < 1.0f) angryGrowing = true;
     if (angryScale > 1.4f) angryGrowing = false;
 
-    QFont font = p.font();
+    QFont font("Segoe UI Emoji");
     font.setPointSizeF(24 * angryScale);  // Scale font
     p.setFont(font);
     p.setPen(Qt::red);
     
-    QString emoji = "#";
+    QString emoji = "💢";  
     
     // Position: slightly above the right eye
     QPointF emojiPos(
