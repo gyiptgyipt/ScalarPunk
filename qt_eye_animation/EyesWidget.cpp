@@ -28,6 +28,7 @@ RobotEyes::RobotEyes(QWidget *parent) : QWidget(parent) {
         [&]() { runHappyEyes(); },        // Happy eyes
         [&]() { lookLeft(); },
         [&]() { lookRight(); },
+        [&]() { Angry(); } ,
         [&]() { goToSleep(); }  
     };
 }
@@ -77,7 +78,7 @@ void RobotEyes::paintEvent(QPaintEvent *) {
 
     // Dynamic sizing based on widget size
     int w = width();
-int h = height();
+    int h = height();
 
 float eyeWidth = w * 0.25f;
 float eyeHeight = h * 0.5f;
@@ -134,46 +135,78 @@ QRectF rightEye(leftX + leftEyeWidth + spacing, topY, rightEyeWidth, eyeHeight);
     } else if (isBlinking) {
         blinkAmount = qMin(1.0f, blinkProgress * 2.0f);
     }
+
     
 
-    auto drawEye = [&](const QRectF &rect) {
-        p.setBrush(QColor(255, 215, 0)); // Gold color
-        p.setPen(Qt::black);
-        p.drawRoundedRect(rect, 60, 60); // Rounded corners with radius 60
+auto drawEye = [&](const QRectF &rect, const QColor &eyeColor) {
+    p.setBrush(eyeColor);
+    p.setPen(Qt::black);
+    p.drawRoundedRect(rect, 60, 60);
+    
+    // Blink effect
+    if (blinkAmount > 0.0f) {
+        QRectF lid(rect.left(), rect.top(), rect.width(), (rect.height() - 10) * blinkAmount);
+        p.setBrush(Qt::black);
+        p.setPen(Qt::NoPen);
+        p.drawRoundedRect(lid, 30, 30);
+    }
 
-        // Blink effect
-        if (blinkAmount > 0.0f) {
-            QRectF lid(rect.left(), rect.top(), rect.width(), (rect.height() - 10) * blinkAmount);
-            p.setBrush(Qt::black);
-            p.setPen(Qt::NoPen);
-            p.drawRoundedRect(lid, 30, 30); // Match eye shape
-        }
-
-        // Happy overlay
-        // if (smileMode) {
-        //     QPointF left = rect.bottomLeft();
-        //     QPointF right = rect.bottomRight();
-        //     QPointF tip = QPointF(rect.center().x(), rect.bottom() - rect.height() * 0.4);
-        //     p.setBrush(Qt::black);
-        //     QPolygonF poly;
-        //     poly << left << right << tip;
-        //     p.drawPolygon(poly);
-        // }
-
-        if (smileMode) {
-        QRectF mouthRect = QRectF(
-            rect.left(), 
-            rect.bottom() - rect.height() * 0.4,  // adjust height/position for mouth
-            rect.width(), 
-            rect.height() * 0.4                   // thickness of the mouth
+    if (smileMode) {
+        QRectF mouthRect(
+            rect.left(),
+            rect.bottom() - rect.height() * 0.4,
+            rect.width(),
+            rect.height() * 0.4
         );
         p.setBrush(Qt::black);
         p.drawRect(mouthRect);
     }
 };
 
-    drawEye(leftEye);
-    drawEye(rightEye);
+// Now you can safely call drawEye anywhere below:
+if (isAngry) {
+
+    drawEye(leftEye, QColor(200, 0, 0));  // red
+    drawEye(rightEye, QColor(200, 0, 0));
+
+    p.setBrush(Qt::black);
+
+    QPointF topLeft(rect().left() + rect().width() , rect().top() + rect().height() * 0.2);
+    QPointF topRight(rect().right() - rect().width() , rect().top() + rect().height() * 0.2);
+    QPointF bottomMid(rect().center().x(), rect().top() + rect().height() * 0.5);
+
+    QPolygonF angryBrow;
+    angryBrow << topLeft << topRight << bottomMid;
+    p.drawPolygon(angryBrow);
+
+    // emoji part
+    if (angryGrowing)
+        angryScale += 0.02f;
+    else
+        angryScale -= 0.02f;
+
+    if (angryScale < 1.0f) angryGrowing = true;
+    if (angryScale > 1.4f) angryGrowing = false;
+
+    QFont font = p.font();
+    font.setPointSizeF(24 * angryScale);  // Scale font
+    p.setFont(font);
+    p.setPen(Qt::red);
+    
+    QString emoji = "#";
+    
+    // Position: slightly above the right eye
+    QPointF emojiPos(
+        leftEye.left() - p.fontMetrics().horizontalAdvance(emoji) / 4.0,
+        leftEye.top() * angryScale
+    );
+    
+    p.drawText(emojiPos, emoji);
+
+} else {
+    drawEye(leftEye, QColor(255, 215, 0));  // gold
+    drawEye(rightEye, QColor(255, 215, 0));
+}
 }
 
 void RobotEyes::lookLeft() {
@@ -199,12 +232,20 @@ void RobotEyes::lookRight() {
 
 void RobotEyes::goToSleep() {
     isSleeping = true;
+    isAngry = false;
 }
 
 void RobotEyes::wakeUp() {
     isSleeping = false;
+    isAngry = false;
     blinkProgress = 0;
 }
+
+void RobotEyes::Angry() {
+    isAngry = true;
+    isSleeping = false;
+}
+
 
 
 void RobotEyes::nextAnimation() {
