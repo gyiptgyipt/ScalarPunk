@@ -29,30 +29,26 @@ RobotEyes::RobotEyes(QWidget *parent) : QWidget(parent) {
         [&]() { lookLeft(); },
         [&]() { lookRight(); },
         [&]() { Angry(); } ,
+        [&]() { Charging(); } ,
         [&]() { goToSleep(); }  
     };
 }
 
-void RobotEyes::startBlink() {
-    isBlinking = true;
-    blinkProgress = 0.0f;
-}
-
-void RobotEyes::runHappyEyes() {
-    smileMode = true;
-    QTimer::singleShot(1000, [this]() {
-        smileMode = false;
-    });
-}
 
 void RobotEyes::updateAnimation() {
     if (isBlinking) {
-        blinkProgress += 0.05f;
-        if (blinkProgress >= 1.0f) {
-            isBlinking = false;
-            blinkTimer.start(3000 + QRandomGenerator::global()->bounded(2000));
+    blinkProgress += 0.05f;
+    if (blinkProgress >= 1.0f) {
+        isBlinking = false;
+
+        if (allowBlinking) {
+            int delay = 3000 + QRandomGenerator::global()->bounded(3000);  // 3–6 sec
+            blinkTimer.start(delay);
         }
     }
+}
+
+
 
     // Animate "Zzz" rising effect
     if (isSleeping) {
@@ -133,7 +129,8 @@ QRectF rightEye(leftX + leftEyeWidth + spacing, topY, rightEyeWidth, eyeHeight);
         QPointF zzzPos(width() / 1.5f - textWidth / 2.0f, topY + 30 + zzzY);
         p.drawText(zzzPos, zzzText);
     } else if (isBlinking) {
-        blinkAmount = qMin(1.0f, blinkProgress * 2.0f);
+        float t = blinkProgress;
+        blinkAmount = (t < 0.5f) ? (t * 2.0f) : ((1.0f - t) * 2.0f);
     }
 
     
@@ -151,7 +148,7 @@ auto drawEye = [&](const QRectF &rect, const QColor &eyeColor) {
         p.drawRoundedRect(lid, 30, 30);
     }
 
-    if (smileMode) {
+    if (isSmiling) {
         QRectF mouthRect(
             rect.left(),
             rect.bottom() - rect.height() * 0.4,
@@ -165,51 +162,68 @@ auto drawEye = [&](const QRectF &rect, const QColor &eyeColor) {
 
 // Now you can safely call drawEye anywhere below:
 if (isAngry) {
-
     drawEye(leftEye, QColor(200, 0, 0));  // red
     drawEye(rightEye, QColor(200, 0, 0));
 
+    // angry brow
     p.setBrush(Qt::black);
-
-    QPointF topLeft(rect().left() + rect().width() , rect().top() + rect().height() * 0.2);
-    QPointF topRight(rect().right() - rect().width() , rect().top() + rect().height() * 0.2);
+    QPointF topLeft(rect().left() + rect().width(), rect().top() + rect().height() * 0.2);
+    QPointF topRight(rect().right() - rect().width(), rect().top() + rect().height() * 0.2);
     QPointF bottomMid(rect().center().x(), rect().top() + rect().height() * 0.5);
-
     QPolygonF angryBrow;
     angryBrow << topLeft << topRight << bottomMid;
     p.drawPolygon(angryBrow);
+    
 
-    // emoji part
-    if (angryGrowing)
-        angryScale += 0.02f;
-    else
-        angryScale -= 0.02f;
-
-    if (angryScale < 1.0f) angryGrowing = true;
-    if (angryScale > 1.4f) angryGrowing = false;
+    // emoji scaling
+    angryScale += (angryGrowing ? 0.02f : -0.02f);
+    angryGrowing = (angryScale >= 1.4f) ? false : (angryScale <= 1.0f) ? true : angryGrowing;
 
     QFont font("Segoe UI Emoji");
-    font.setPointSizeF(24 * angryScale);  // Scale font
+    font.setPointSizeF(24 * angryScale);
     p.setFont(font);
     p.setPen(Qt::red);
-    
-    QString emoji = "💢";  
-    
-    // Position: slightly above the right eye
+    QString emoji = "💢";
     QPointF emojiPos(
-        leftEye.left() - p.fontMetrics().horizontalAdvance(emoji) / 4.0,
-        leftEye.top() * angryScale
+        leftEye.left() - p.fontMetrics().horizontalAdvance(emoji),
+        leftEye.top()
     );
-    
+    p.drawText(emojiPos, emoji);
+
+} else if (isCharging) {
+    drawEye(leftEye, QColor(0, 255, 0));  // green
+    drawEye(rightEye, QColor(0, 255, 0));
+
+    // emoji scaling
+    chargingScale += (chargingUp ? 0.015f : -0.015f);
+    chargingScale = qBound(1.0f, chargingScale, 1.3f);
+    chargingUp = (chargingScale >= 1.3f) ? false : (chargingScale <= 1.0f) ? true : chargingUp;
+
+    QFont font("Segoe UI Emoji");
+    font.setPointSizeF(24 * chargingScale);
+    p.setFont(font);
+    p.setPen(QColor(255, 255, 0, 230));
+    QString emoji = "⚡️";
+    QPointF emojiPos(
+        rect().center().x() - p.fontMetrics().horizontalAdvance(emoji) / 2.0,
+        rect().top() + rect().height() * 0.1
+    );
     p.drawText(emojiPos, emoji);
 
 } else {
     drawEye(leftEye, QColor(255, 215, 0));  // gold
     drawEye(rightEye, QColor(255, 215, 0));
 }
+
+
+
 }
 
+
 void RobotEyes::lookLeft() {
+
+    isSmiling = false;
+
     eyeOffset = -100;
     eyeSquash = qBound(-1.0f, eyeOffset / 100.0f, 1.0f);
 
@@ -220,6 +234,9 @@ void RobotEyes::lookLeft() {
 }
 
 void RobotEyes::lookRight() {
+
+    isSmiling = false;
+    
     eyeOffset = 100;
     eyeSquash = qBound(-1.0f, eyeOffset / 100.0f, 1.0f);
 
@@ -233,19 +250,54 @@ void RobotEyes::lookRight() {
 void RobotEyes::goToSleep() {
     isSleeping = true;
     isAngry = false;
+    isCharging = false;
+    isSmiling = false;
+
+    allowBlinking = false;
+
 }
 
 void RobotEyes::wakeUp() {
     isSleeping = false;
     isAngry = false;
-    blinkProgress = 0;
+    isCharging = false;
+    isSmiling = false;
+   
+    allowBlinking = true;
+    
 }
 
 void RobotEyes::Angry() {
     isAngry = true;
     isSleeping = false;
+    isCharging = false;
+   
+    isSmiling = false;
+    allowBlinking = true;
 }
 
+void RobotEyes::Charging() {
+    isCharging = true;
+    isSleeping = false;
+    isAngry    = false;
+     
+    isSmiling = true;
+    allowBlinking = true;
+   
+}
+
+void RobotEyes::startBlink() {
+    if (!isBlinking && allowBlinking) {
+        isBlinking = true;
+        blinkProgress = 0.0f;
+    }
+}
+
+void RobotEyes::runHappyEyes() {
+    isSmiling = true;
+    // allowBlinking = true;
+    
+}
 
 
 void RobotEyes::nextAnimation() {

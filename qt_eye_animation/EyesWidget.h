@@ -51,17 +51,19 @@ private slots:
     void wakeUp();
     void goToSleep();
     void Angry();
-
+    void Charging();
 private:
     QTimer updateTimer;
     QTimer blinkTimer;
     QTimer actionTimer;
 
     float blinkProgress = 0.0f;
-    bool isBlinking = false;
+    bool isBlinking = true;
+    bool allowBlinking = true;
     bool isSleeping = false;
-    bool smileMode = false;
+    bool isSmiling = false;
     bool isAngry = false;
+    bool isCharging = false;
 
 
     float eyeOffset = 0.0f;
@@ -71,7 +73,10 @@ private:
     float zzzOpacity = 1.0f;
 
     float angryScale = 1.0f; //angry position ချိန်ရန် (၀င်ပြင်)
-    bool angryGrowing = true;
+    bool angryGrowing = false;
+
+    float chargingScale = 0.015f;
+    bool chargingUp = false;
 
 
 
