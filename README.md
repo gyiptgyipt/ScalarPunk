@@ -1,2 +1,2 @@
-# qt_robot_face
-for robot emotions animations
+# Scalar_Punk
+Robot eyes emotions that can control by ros2 topic
