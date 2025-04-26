@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/ScalarPunk.dir/ScalarPunk_autogen/mocs_compilation.cpp.o CMakeFiles/ScalarPunk.dir/main.cpp.o CMakeFiles/ScalarPunk.dir/mainwindow.cpp.o CMakeFiles/ScalarPunk.dir/Scalar_punk_widget.cpp.o -o ScalarPunk  /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.3 /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.3 /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.3 
