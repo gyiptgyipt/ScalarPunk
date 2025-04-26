@@ -1,7 +1,7 @@
-CMakeFiles/RobotFace.dir/EyesWidget.cpp.o: \
- /home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/EyesWidget.cpp \
+CMakeFiles/ScalarPunk.dir/Scalar_punk_widget.cpp.o: \
+ /home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/Scalar_punk_widget.cpp \
  /usr/include/stdc-predef.h \
- /home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/EyesWidget.h \
+ /home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/Scalar_punk_widget.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QWidget \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qwidget.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtwidgetsglobal.h \

@@ -2,11 +2,11 @@
 /home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/mainwindow.cpp
  uic:./ui_mainwindow.h
 /home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/main.cpp
-/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/EyesWidget.cpp
+/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/Scalar_punk_widget.cpp
 /home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/mainwindow.h
  mmc:Q_OBJECT
  mdp:/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/mainwindow.h
- mdp:/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/RobotFace_autogen/moc_predefs.h
+ mdp:/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/ScalarPunk_autogen/moc_predefs.h
  mdp:/usr/include/asm-generic/errno-base.h
  mdp:/usr/include/asm-generic/errno.h
  mdp:/usr/include/assert.h
@@ -331,10 +331,10 @@
  mdp:/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
  mdp:/usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h
  mdp:/usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h
-/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/EyesWidget.h
+/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/Scalar_punk_widget.h
  mmc:Q_OBJECT
- mdp:/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/EyesWidget.h
- mdp:/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/RobotFace_autogen/moc_predefs.h
+ mdp:/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/Scalar_punk_widget.h
+ mdp:/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/ScalarPunk_autogen/moc_predefs.h
  mdp:/usr/include/asm-generic/errno-base.h
  mdp:/usr/include/asm-generic/errno.h
  mdp:/usr/include/assert.h

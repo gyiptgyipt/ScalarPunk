@@ -117,85 +117,85 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named RobotFace
+# Target rules for targets named ScalarPunk
 
 # Build rule for target.
-RobotFace: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 RobotFace
-.PHONY : RobotFace
+ScalarPunk: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ScalarPunk
+.PHONY : ScalarPunk
 
 # fast build rule for target.
-RobotFace/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RobotFace.dir/build.make CMakeFiles/RobotFace.dir/build
-.PHONY : RobotFace/fast
+ScalarPunk/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ScalarPunk.dir/build.make CMakeFiles/ScalarPunk.dir/build
+.PHONY : ScalarPunk/fast
 
 #=============================================================================
-# Target rules for targets named RobotFace_autogen
+# Target rules for targets named ScalarPunk_autogen
 
 # Build rule for target.
-RobotFace_autogen: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 RobotFace_autogen
-.PHONY : RobotFace_autogen
+ScalarPunk_autogen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ScalarPunk_autogen
+.PHONY : ScalarPunk_autogen
 
 # fast build rule for target.
-RobotFace_autogen/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RobotFace_autogen.dir/build.make CMakeFiles/RobotFace_autogen.dir/build
-.PHONY : RobotFace_autogen/fast
+ScalarPunk_autogen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ScalarPunk_autogen.dir/build.make CMakeFiles/ScalarPunk_autogen.dir/build
+.PHONY : ScalarPunk_autogen/fast
 
-EyesWidget.o: EyesWidget.cpp.o
-.PHONY : EyesWidget.o
-
-# target to build an object file
-EyesWidget.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RobotFace.dir/build.make CMakeFiles/RobotFace.dir/EyesWidget.cpp.o
-.PHONY : EyesWidget.cpp.o
-
-EyesWidget.i: EyesWidget.cpp.i
-.PHONY : EyesWidget.i
-
-# target to preprocess a source file
-EyesWidget.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RobotFace.dir/build.make CMakeFiles/RobotFace.dir/EyesWidget.cpp.i
-.PHONY : EyesWidget.cpp.i
-
-EyesWidget.s: EyesWidget.cpp.s
-.PHONY : EyesWidget.s
-
-# target to generate assembly for a file
-EyesWidget.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RobotFace.dir/build.make CMakeFiles/RobotFace.dir/EyesWidget.cpp.s
-.PHONY : EyesWidget.cpp.s
-
-RobotFace_autogen/mocs_compilation.o: RobotFace_autogen/mocs_compilation.cpp.o
-.PHONY : RobotFace_autogen/mocs_compilation.o
+ScalarPunk_autogen/mocs_compilation.o: ScalarPunk_autogen/mocs_compilation.cpp.o
+.PHONY : ScalarPunk_autogen/mocs_compilation.o
 
 # target to build an object file
-RobotFace_autogen/mocs_compilation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RobotFace.dir/build.make CMakeFiles/RobotFace.dir/RobotFace_autogen/mocs_compilation.cpp.o
-.PHONY : RobotFace_autogen/mocs_compilation.cpp.o
+ScalarPunk_autogen/mocs_compilation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ScalarPunk.dir/build.make CMakeFiles/ScalarPunk.dir/ScalarPunk_autogen/mocs_compilation.cpp.o
+.PHONY : ScalarPunk_autogen/mocs_compilation.cpp.o
 
-RobotFace_autogen/mocs_compilation.i: RobotFace_autogen/mocs_compilation.cpp.i
-.PHONY : RobotFace_autogen/mocs_compilation.i
+ScalarPunk_autogen/mocs_compilation.i: ScalarPunk_autogen/mocs_compilation.cpp.i
+.PHONY : ScalarPunk_autogen/mocs_compilation.i
 
 # target to preprocess a source file
-RobotFace_autogen/mocs_compilation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RobotFace.dir/build.make CMakeFiles/RobotFace.dir/RobotFace_autogen/mocs_compilation.cpp.i
-.PHONY : RobotFace_autogen/mocs_compilation.cpp.i
+ScalarPunk_autogen/mocs_compilation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ScalarPunk.dir/build.make CMakeFiles/ScalarPunk.dir/ScalarPunk_autogen/mocs_compilation.cpp.i
+.PHONY : ScalarPunk_autogen/mocs_compilation.cpp.i
 
-RobotFace_autogen/mocs_compilation.s: RobotFace_autogen/mocs_compilation.cpp.s
-.PHONY : RobotFace_autogen/mocs_compilation.s
+ScalarPunk_autogen/mocs_compilation.s: ScalarPunk_autogen/mocs_compilation.cpp.s
+.PHONY : ScalarPunk_autogen/mocs_compilation.s
 
 # target to generate assembly for a file
-RobotFace_autogen/mocs_compilation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RobotFace.dir/build.make CMakeFiles/RobotFace.dir/RobotFace_autogen/mocs_compilation.cpp.s
-.PHONY : RobotFace_autogen/mocs_compilation.cpp.s
+ScalarPunk_autogen/mocs_compilation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ScalarPunk.dir/build.make CMakeFiles/ScalarPunk.dir/ScalarPunk_autogen/mocs_compilation.cpp.s
+.PHONY : ScalarPunk_autogen/mocs_compilation.cpp.s
+
+Scalar_punk_widget.o: Scalar_punk_widget.cpp.o
+.PHONY : Scalar_punk_widget.o
+
+# target to build an object file
+Scalar_punk_widget.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ScalarPunk.dir/build.make CMakeFiles/ScalarPunk.dir/Scalar_punk_widget.cpp.o
+.PHONY : Scalar_punk_widget.cpp.o
+
+Scalar_punk_widget.i: Scalar_punk_widget.cpp.i
+.PHONY : Scalar_punk_widget.i
+
+# target to preprocess a source file
+Scalar_punk_widget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ScalarPunk.dir/build.make CMakeFiles/ScalarPunk.dir/Scalar_punk_widget.cpp.i
+.PHONY : Scalar_punk_widget.cpp.i
+
+Scalar_punk_widget.s: Scalar_punk_widget.cpp.s
+.PHONY : Scalar_punk_widget.s
+
+# target to generate assembly for a file
+Scalar_punk_widget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ScalarPunk.dir/build.make CMakeFiles/ScalarPunk.dir/Scalar_punk_widget.cpp.s
+.PHONY : Scalar_punk_widget.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RobotFace.dir/build.make CMakeFiles/RobotFace.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ScalarPunk.dir/build.make CMakeFiles/ScalarPunk.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -203,7 +203,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RobotFace.dir/build.make CMakeFiles/RobotFace.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ScalarPunk.dir/build.make CMakeFiles/ScalarPunk.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -211,7 +211,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RobotFace.dir/build.make CMakeFiles/RobotFace.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ScalarPunk.dir/build.make CMakeFiles/ScalarPunk.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 mainwindow.o: mainwindow.cpp.o
@@ -219,7 +219,7 @@ mainwindow.o: mainwindow.cpp.o
 
 # target to build an object file
 mainwindow.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RobotFace.dir/build.make CMakeFiles/RobotFace.dir/mainwindow.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ScalarPunk.dir/build.make CMakeFiles/ScalarPunk.dir/mainwindow.cpp.o
 .PHONY : mainwindow.cpp.o
 
 mainwindow.i: mainwindow.cpp.i
@@ -227,7 +227,7 @@ mainwindow.i: mainwindow.cpp.i
 
 # target to preprocess a source file
 mainwindow.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RobotFace.dir/build.make CMakeFiles/RobotFace.dir/mainwindow.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ScalarPunk.dir/build.make CMakeFiles/ScalarPunk.dir/mainwindow.cpp.i
 .PHONY : mainwindow.cpp.i
 
 mainwindow.s: mainwindow.cpp.s
@@ -235,7 +235,7 @@ mainwindow.s: mainwindow.cpp.s
 
 # target to generate assembly for a file
 mainwindow.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RobotFace.dir/build.make CMakeFiles/RobotFace.dir/mainwindow.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ScalarPunk.dir/build.make CMakeFiles/ScalarPunk.dir/mainwindow.cpp.s
 .PHONY : mainwindow.cpp.s
 
 # Help Target
@@ -246,14 +246,14 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... RobotFace_autogen"
-	@echo "... RobotFace"
-	@echo "... EyesWidget.o"
-	@echo "... EyesWidget.i"
-	@echo "... EyesWidget.s"
-	@echo "... RobotFace_autogen/mocs_compilation.o"
-	@echo "... RobotFace_autogen/mocs_compilation.i"
-	@echo "... RobotFace_autogen/mocs_compilation.s"
+	@echo "... ScalarPunk_autogen"
+	@echo "... ScalarPunk"
+	@echo "... ScalarPunk_autogen/mocs_compilation.o"
+	@echo "... ScalarPunk_autogen/mocs_compilation.i"
+	@echo "... ScalarPunk_autogen/mocs_compilation.s"
+	@echo "... Scalar_punk_widget.o"
+	@echo "... Scalar_punk_widget.i"
+	@echo "... Scalar_punk_widget.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -1,4 +1,4 @@
-#include "EyesWidget.h"
+#include "Scalar_punk_widget.h"
 #include <QPainter>
 #include <QRandomGenerator>
 #include <QtMath>
@@ -222,7 +222,7 @@ if (isAngry) {
 
 void RobotEyes::lookLeft() {
 
-    isSmiling = false;
+    isSmiling = true;
 
     eyeOffset = -100;
     eyeSquash = qBound(-1.0f, eyeOffset / 100.0f, 1.0f);
@@ -235,7 +235,7 @@ void RobotEyes::lookLeft() {
 
 void RobotEyes::lookRight() {
 
-    isSmiling = false;
+    isSmiling = true;
     
     eyeOffset = 100;
     eyeSquash = qBound(-1.0f, eyeOffset / 100.0f, 1.0f);

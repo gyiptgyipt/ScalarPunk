@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(RobotFace VERSION 0.1 LANGUAGES CXX)
+project(ScalarPunk VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -19,30 +19,30 @@ set(PROJECT_SOURCES
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
-    EyesWidget.cpp
-    EyesWidget.h
+    Scalar_punk_widget.cpp
+    Scalar_punk_widget.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(RobotFace
+    qt_add_executable(ScalarPunk
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
 else()
     if(ANDROID)
-        add_library(RobotFace SHARED
+        add_library(ScalarPunk SHARED
             ${PROJECT_SOURCES}
         )
     else()
-        add_executable(RobotFace
+        add_executable(ScalarPunk
             ${PROJECT_SOURCES}
         )
     endif()
 endif()
 
-target_link_libraries(RobotFace PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(ScalarPunk PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
-set_target_properties(RobotFace PROPERTIES
+set_target_properties(ScalarPunk PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -51,5 +51,5 @@ set_target_properties(RobotFace PROPERTIES
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(RobotFace)
+    qt_finalize_executable(ScalarPunk)
 endif()

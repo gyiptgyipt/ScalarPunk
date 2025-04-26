@@ -1,5 +1,5 @@
 #include <QApplication>
-#include "EyesWidget.h"
+#include "Scalar_punk_widget.h"
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);

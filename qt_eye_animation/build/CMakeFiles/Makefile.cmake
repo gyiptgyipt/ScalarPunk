@@ -74,12 +74,12 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
-  "CMakeFiles/RobotFace_autogen.dir/AutogenInfo.json"
+  "CMakeFiles/ScalarPunk_autogen.dir/AutogenInfo.json"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/RobotFace.dir/DependInfo.cmake"
-  "CMakeFiles/RobotFace_autogen.dir/DependInfo.cmake"
+  "CMakeFiles/ScalarPunk.dir/DependInfo.cmake"
+  "CMakeFiles/ScalarPunk_autogen.dir/DependInfo.cmake"
   )

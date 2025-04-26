@@ -26,8 +26,8 @@
 // };
 
 
-#ifndef EYESWIDGET_H
-#define EYESWIDGET_H
+#ifndef Scalar_punk_widget_H
+#define Scalar_punk_widget_H
 
 #include <QWidget>
 #include <QTimer>
@@ -91,4 +91,4 @@ private:
     void nextAnimation();
 };
 
-#endif // EYESWIDGET_H
+#endif // Scalar_punk_widget_H

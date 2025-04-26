@@ -1,5 +1,5 @@
 {
-	"BUILD_DIR" : "/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/RobotFace_autogen",
+	"BUILD_DIR" : "/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/ScalarPunk_autogen",
 	"CMAKE_BINARY_DIR" : "/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build",
 	"CMAKE_CURRENT_BINARY_DIR" : "/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build",
 	"CMAKE_CURRENT_SOURCE_DIR" : "/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation",
@@ -73,9 +73,9 @@
 	"HEADERS" : 
 	[
 		[
-			"/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/EyesWidget.h",
+			"/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/Scalar_punk_widget.h",
 			"MU",
-			"EWIEGA46WW/moc_EyesWidget.cpp",
+			"EWIEGA46WW/moc_Scalar_punk_widget.cpp",
 			null
 		],
 		[
@@ -86,8 +86,8 @@
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
-	"INCLUDE_DIR" : "/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/RobotFace_autogen/include",
-	"MOC_COMPILATION_FILE" : "/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/RobotFace_autogen/mocs_compilation.cpp",
+	"INCLUDE_DIR" : "/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/ScalarPunk_autogen/include",
+	"MOC_COMPILATION_FILE" : "/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/ScalarPunk_autogen/mocs_compilation.cpp",
 	"MOC_DEFINITIONS" : [ "QT_CORE_LIB", "QT_GUI_LIB", "QT_NO_DEBUG", "QT_WIDGETS_LIB" ],
 	"MOC_DEPEND_FILTERS" : 
 	[
@@ -124,21 +124,21 @@
 		"-c",
 		"/usr/share/cmake-3.22/Modules/CMakeCXXCompilerABI.cpp"
 	],
-	"MOC_PREDEFS_FILE" : "/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/RobotFace_autogen/moc_predefs.h",
+	"MOC_PREDEFS_FILE" : "/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/ScalarPunk_autogen/moc_predefs.h",
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : [],
 	"MULTI_CONFIG" : false,
 	"PARALLEL" : 6,
-	"PARSE_CACHE_FILE" : "/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/CMakeFiles/RobotFace_autogen.dir/ParseCache.txt",
+	"PARSE_CACHE_FILE" : "/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/CMakeFiles/ScalarPunk_autogen.dir/ParseCache.txt",
 	"QT_MOC_EXECUTABLE" : "/usr/lib/qt5/bin/moc",
 	"QT_UIC_EXECUTABLE" : "/usr/lib/qt5/bin/uic",
 	"QT_VERSION_MAJOR" : 5,
 	"QT_VERSION_MINOR" : 15,
-	"SETTINGS_FILE" : "/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/CMakeFiles/RobotFace_autogen.dir/AutogenUsed.txt",
+	"SETTINGS_FILE" : "/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/build/CMakeFiles/ScalarPunk_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
 		[
-			"/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/EyesWidget.cpp",
+			"/home/zyme/ros_ws/qt_robot_face/qt_robot_face/qt_eye_animation/Scalar_punk_widget.cpp",
 			"MU",
 			null
 		],
