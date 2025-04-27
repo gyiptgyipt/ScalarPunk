@@ -1,7 +1,0 @@
-/home/zyme/ros_ws/scalarpunk/ScalarPunk/scalar_punk_art/build/CMakeFiles/uninstall.dir
-/home/zyme/ros_ws/scalarpunk/ScalarPunk/scalar_punk_art/build/CMakeFiles/ScalarPunk_uninstall.dir
-/home/zyme/ros_ws/scalarpunk/ScalarPunk/scalar_punk_art/build/CMakeFiles/ScalarPunk.dir
-/home/zyme/ros_ws/scalarpunk/ScalarPunk/scalar_punk_art/build/CMakeFiles/test.dir
-/home/zyme/ros_ws/scalarpunk/ScalarPunk/scalar_punk_art/build/CMakeFiles/edit_cache.dir
-/home/zyme/ros_ws/scalarpunk/ScalarPunk/scalar_punk_art/build/CMakeFiles/rebuild_cache.dir
-/home/zyme/ros_ws/scalarpunk/ScalarPunk/scalar_punk_art/build/CMakeFiles/ScalarPunk_autogen.dir

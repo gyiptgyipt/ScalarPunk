@@ -1,31 +1,3 @@
-// #pragma once
-
-// #include <QWidget>
-// #include <QTimer>
-// #include <QPointF>
-
-// class RobotEyes : public QWidget {
-//     Q_OBJECT
-
-// public:
-//     RobotEyes(QWidget *parent = nullptr);
-
-// protected:
-//     void paintEvent(QPaintEvent *event) override;
-
-// private:
-//     QTimer blinkTimer;
-//     QTimer updateTimer;
-
-//     bool isBlinking = false;
-//     float blinkProgress = 0.0f;
-//     QPointF pupilOffset;
-
-//     void startBlink();
-//     void updateAnimation();
-// };
-
-
 #ifndef Scalar_punk_widget_H
 #define Scalar_punk_widget_H
 
@@ -33,11 +5,22 @@
 #include <QTimer>
 #include <QPointF>
 
+
+#include <vector>
+#include <functional>
+#include <thread>
+
+#include <rclcpp/rclcpp.hpp>
+#include <std_msgs/msg/string.hpp>
+
+
 class RobotEyes : public QWidget {
     Q_OBJECT
 
 public:
     RobotEyes(QWidget *parent = nullptr);
+    ~RobotEyes(); 
+
 
 protected:
     void paintEvent(QPaintEvent *event) override;
@@ -87,6 +70,13 @@ private:
 
     int animationIndex = 0;
     QList<std::function<void()>> animations;
+
+
+
+    // ROS2
+    rclcpp::Node::SharedPtr node;
+    rclcpp::Subscription<std_msgs::msg::String>::SharedPtr emotion_subscriber;
+    std::thread ros_spin_thread;
 
     void nextAnimation();
 };

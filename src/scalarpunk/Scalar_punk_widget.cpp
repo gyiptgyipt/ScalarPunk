@@ -12,8 +12,8 @@ RobotEyes::RobotEyes(QWidget *parent) : QWidget(parent) {
     connect(&blinkTimer, &QTimer::timeout, this, &RobotEyes::startBlink);
     blinkTimer.start(3000 + QRandomGenerator::global()->bounded(2000));
 
-    connect(&actionTimer, &QTimer::timeout, this, &RobotEyes::nextAnimation);
-    actionTimer.start(3000); // Switch animation every 3s
+    // connect(&actionTimer, &QTimer::timeout, this, &RobotEyes::nextAnimation);
+    // actionTimer.start(3000); // Switch animation every 3s
 
     animations = {
         // [&]() { isSleeping = false; blinkProgress = 0; },  // Wakeup
@@ -32,7 +32,52 @@ RobotEyes::RobotEyes(QWidget *parent) : QWidget(parent) {
         [&]() { Charging(); } ,
         [&]() { goToSleep(); }  
     };
+
+
+   rclcpp::init(0, nullptr);  // Initialize ROS2
+
+    // Ensure ROS 2 node initialization
+    node = rclcpp::Node::make_shared("robot_eyes_node");
+    
+    emotion_subscriber = node->create_subscription<std_msgs::msg::String>(
+        "/robot_emotion", 10,
+        [this](const std_msgs::msg::String::SharedPtr msg) {
+            QString emotion = QString::fromStdString(msg->data);
+            if (emotion == "happy") {
+                runHappyEyes();
+            } else if (emotion == "angry") {
+                Angry();
+            } else if (emotion == "charging") {
+                Charging();
+            } else if (emotion == "sleep") {
+                goToSleep();
+            } else if (emotion == "wakeup") {
+                wakeUp();
+            } else if (emotion == "look_left") {
+                lookLeft();
+            } else if (emotion == "look_right") {
+                lookRight();
+            }
+        }
+    );
+    
+    // Create a thread to spin ROS node in the background
+    ros_spin_thread = std::thread([this]() {
+        rclcpp::spin(node);
+    });
+
+
+
 }
+
+
+RobotEyes::~RobotEyes() {
+    rclcpp::shutdown();  // Properly shut down ROS
+    if (ros_spin_thread.joinable()) {
+        ros_spin_thread.join();  // Wait for the thread to finish
+    }
+}
+
 
 
 void RobotEyes::updateAnimation() {
