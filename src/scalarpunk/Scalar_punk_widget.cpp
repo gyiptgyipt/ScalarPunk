@@ -267,28 +267,32 @@ if (isAngry) {
 
 void RobotEyes::lookLeft() {
 
+    isCharging = false;
+    isSleeping = false;
+    isAngry    = false;
+     
     isSmiling = true;
+    allowBlinking = true;
 
     eyeOffset = -100;
     eyeSquash = qBound(-1.0f, eyeOffset / 100.0f, 1.0f);
 
-    QTimer::singleShot(2000, [this]() {
-        eyeOffset = 0;
-        eyeSquash = 0;
-    });
+   
 }
 
 void RobotEyes::lookRight() {
 
+    isCharging = false;
+    isSleeping = false;
+    isAngry    = false;
+     
     isSmiling = true;
+    allowBlinking = true;
     
     eyeOffset = 100;
     eyeSquash = qBound(-1.0f, eyeOffset / 100.0f, 1.0f);
 
-    QTimer::singleShot(2000, [this]() {
-        eyeOffset = 0;
-        eyeSquash = 0;
-    });
+    
 }
 
 
@@ -300,6 +304,10 @@ void RobotEyes::goToSleep() {
 
     allowBlinking = false;
 
+    eyeOffset = 0;
+    eyeSquash = 0;
+    
+
 }
 
 void RobotEyes::wakeUp() {
@@ -309,6 +317,9 @@ void RobotEyes::wakeUp() {
     isSmiling = false;
    
     allowBlinking = true;
+
+    eyeOffset = 0;
+    eyeSquash = 0;
     
 }
 
@@ -319,6 +330,9 @@ void RobotEyes::Angry() {
    
     isSmiling = false;
     allowBlinking = true;
+
+    eyeOffset = 0;
+    eyeSquash = 0;
 }
 
 void RobotEyes::Charging() {
@@ -326,8 +340,11 @@ void RobotEyes::Charging() {
     isSleeping = false;
     isAngry    = false;
      
-    isSmiling = true;
+    isSmiling = false;
     allowBlinking = true;
+
+    eyeOffset = 0;
+    eyeSquash = 0;
    
 }
 
@@ -339,8 +356,15 @@ void RobotEyes::startBlink() {
 }
 
 void RobotEyes::runHappyEyes() {
+    isCharging = false;
+    isSleeping = false;
+    isAngry    = false;
+     
     isSmiling = true;
-    // allowBlinking = true;
+    allowBlinking = true;
+
+    eyeOffset = 0;
+    eyeSquash = 0;
     
 }
 
