@@ -3,6 +3,8 @@
 #include <QRandomGenerator>
 #include <QtMath>
 
+
+
 RobotEyes::RobotEyes(QWidget *parent) : QWidget(parent) {
     setFixedSize(800, 400);
 
@@ -39,27 +41,63 @@ RobotEyes::RobotEyes(QWidget *parent) : QWidget(parent) {
     // Ensure ROS 2 node initialization
     node = rclcpp::Node::make_shared("robot_eyes_node");
     
-    emotion_subscriber = node->create_subscription<std_msgs::msg::String>(
-        "/robot_emotion", 10,
-        [this](const std_msgs::msg::String::SharedPtr msg) {
-            QString emotion = QString::fromStdString(msg->data);
-            if (emotion == "happy") {
-                runHappyEyes();
-            } else if (emotion == "angry") {
-                Angry();
-            } else if (emotion == "charging") {
-                Charging();
-            } else if (emotion == "sleep") {
-                goToSleep();
-            } else if (emotion == "wakeup") {
-                wakeUp();
-            } else if (emotion == "look_left") {
-                lookLeft();
-            } else if (emotion == "look_right") {
-                lookRight();
-            }
+    //topic
+    // emotion_subscriber = node->create_subscription<std_msgs::msg::String>(
+    //     "/robot_emotion", 10,
+    //     [this](const std_msgs::msg::String::SharedPtr msg) {
+    //         QString emotion = QString::fromStdString(msg->data);
+    //         if (emotion == "happy") {
+    //             runHappyEyes();
+    //         } else if (emotion == "angry") {
+    //             Angry();
+    //         } else if (emotion == "charging") {
+    //             Charging();
+    //         } else if (emotion == "sleep") {
+    //             goToSleep();
+    //         } else if (emotion == "wakeup") {
+    //             wakeUp();
+    //         } else if (emotion == "look_left") {
+    //             lookLeft();
+    //         } else if (emotion == "look_right") {
+    //             lookRight();
+    //         }
+    //     }
+    // );
+
+    //srv
+    emotion_service = node->create_service<scalarpunk_interfaces::srv::EmotionCommand>(
+    "/robot_emotion_command",
+    [this](const std::shared_ptr<scalarpunk_interfaces::srv::EmotionCommand::Request> request,
+           std::shared_ptr<scalarpunk_interfaces::srv::EmotionCommand::Response> response) {
+        QString emotion = QString::fromStdString(request->emotion);
+
+        if (emotion == "happy") {
+            runHappyEyes();
+            response->status = "success";
+        } else if (emotion == "angry") {
+            Angry();
+            response->status = "success";
+        } else if (emotion == "charging") {
+            Charging();
+            response->status = "success";  // For example
+        } else if (emotion == "sleep") {
+            goToSleep();
+            response->status = "success";
+        } else if (emotion == "wakeup") {
+            wakeUp();
+            response->status = "success";
+        } else if (emotion == "look_left") {
+            lookLeft();
+            response->status = "success";
+        } else if (emotion == "look_right") {
+            lookRight();
+            response->status = "success";
+        } else {
+            response->status = "fail";
         }
-    );
+    }
+);
+
     
     // Create a thread to spin ROS node in the background
     ros_spin_thread = std::thread([this]() {

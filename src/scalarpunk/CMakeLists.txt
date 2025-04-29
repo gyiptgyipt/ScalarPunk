@@ -17,6 +17,7 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(scalarpunk_interfaces REQUIRED)
 
 
 find_package(Qt5 REQUIRED COMPONENTS Widgets)
@@ -33,7 +34,7 @@ add_executable(scalarpunk
 )
 target_link_libraries(scalarpunk ${Qt5Core_LIBRARIES})
 target_link_libraries(scalarpunk ${Qt5Widgets_LIBRARIES})
-ament_target_dependencies(scalarpunk rclcpp  std_msgs)
+ament_target_dependencies(scalarpunk rclcpp  std_msgs scalarpunk_interfaces)
 
 
 install(TARGETS

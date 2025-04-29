@@ -12,6 +12,7 @@
 
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/string.hpp>
+#include "scalarpunk_interfaces/srv/emotion_command.hpp"
 
 
 class RobotEyes : public QWidget {
@@ -75,7 +76,8 @@ private:
 
     // ROS2
     rclcpp::Node::SharedPtr node;
-    rclcpp::Subscription<std_msgs::msg::String>::SharedPtr emotion_subscriber;
+    //rclcpp::Subscription<std_msgs::msg::String>::SharedPtr emotion_subscriber;
+    rclcpp::Service<scalarpunk_interfaces::srv::EmotionCommand>::SharedPtr emotion_service;
     std::thread ros_spin_thread;
 
     void nextAnimation();
