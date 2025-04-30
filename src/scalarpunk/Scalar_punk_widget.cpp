@@ -1,5 +1,13 @@
 #include "Scalar_punk_widget.h"
+
 #include <QPainter>
+#include <QRectF>
+#include <QPen>
+#include <QBrush>
+#include <QPainterPath>
+
+
+
 #include <QRandomGenerator>
 #include <QtMath>
 
@@ -20,18 +28,19 @@ RobotEyes::RobotEyes(QWidget *parent) : QWidget(parent) {
     animations = {
         // [&]() { isSleeping = false; blinkProgress = 0; },  // Wakeup
         // [&]() { startBlink(); },                           // Blink
-        // [&]() { runHappyEyes(); },                         // Happy eyes
+        // [&]() { Smile(); },                         // Happy eyes
         // [&]() { lookLeft(); },
         // [&]() { lookRight(); },
         // [&]() { isSleeping = true; }                       // Sleep
 
         [&]() { wakeUp(); },              // Wakeup
         [&]() { startBlink(); },          // Blink
-        [&]() { runHappyEyes(); },        // Happy eyes
+        [&]() { Smile(); },        // smile eyes
         [&]() { lookLeft(); },
         [&]() { lookRight(); },
         [&]() { Angry(); } ,
         [&]() { Charging(); } ,
+        [&]() { Happy(); } ,
         [&]() { goToSleep(); }  
     };
 
@@ -47,7 +56,7 @@ RobotEyes::RobotEyes(QWidget *parent) : QWidget(parent) {
     //     [this](const std_msgs::msg::String::SharedPtr msg) {
     //         QString emotion = QString::fromStdString(msg->data);
     //         if (emotion == "happy") {
-    //             runHappyEyes();
+    //             Smile();
     //         } else if (emotion == "angry") {
     //             Angry();
     //         } else if (emotion == "charging") {
@@ -71,8 +80,8 @@ RobotEyes::RobotEyes(QWidget *parent) : QWidget(parent) {
            std::shared_ptr<scalarpunk_interfaces::srv::EmotionCommand::Response> response) {
         QString emotion = QString::fromStdString(request->emotion);
 
-        if (emotion == "happy") {
-            runHappyEyes();
+        if (emotion == "smile") {
+            Smile();
             response->status = "success";
         } else if (emotion == "angry") {
             Angry();
@@ -92,7 +101,10 @@ RobotEyes::RobotEyes(QWidget *parent) : QWidget(parent) {
         } else if (emotion == "look_right") {
             lookRight();
             response->status = "success";
-        } else {
+        } else if (emotion == "happy") {
+            Happy();
+            response->status = "success";
+        }    else {
             response->status = "fail";
         }
     }
@@ -144,6 +156,14 @@ void RobotEyes::updateAnimation() {
             zzzOpacity = 1.0f;
         }
     }
+
+
+    if (isHappy) {
+    happyShakePhase += 0.5f; // Controls speed of shake
+    if (happyShakePhase > 2 * M_PI) {
+        happyShakePhase -= 2 * M_PI;
+    }
+}
 
     update();
 }
@@ -293,7 +313,70 @@ if (isAngry) {
     );
     p.drawText(emojiPos, emoji);
 
-} else {
+} else if (isHappy) {
+    qreal shakeX = qSin(happyShakePhase) * 5.0f; // amplitude of shake      //မှတ်ချက် ပျော်နေတဲ့ပုံ မပေါက်၊  ကြောက်နေတဲ့ပုံ ပေါက် xD
+
+    // Apply shake offset
+    leftEye.translate(shakeX, 0);
+    rightEye.translate(shakeX, 0);
+
+    drawEye(leftEye, QColor(255, 215, 0));  // gold
+    drawEye(rightEye, QColor(255, 215, 0)); // gold
+
+    // Draw happy eye "smile" circles under each eye
+    qreal circleRadius = leftEye.height() * 2.0;
+
+    QRectF leftCircle(
+        leftEye.center().x() - circleRadius,
+        leftEye.bottom() - circleRadius * 0.3,
+        circleRadius * 2,
+        circleRadius * 2
+    );
+
+    QRectF rightCircle(
+        rightEye.center().x() - circleRadius,
+        rightEye.bottom() - circleRadius * 0.3,
+        circleRadius * 2,
+        circleRadius * 2
+    );
+
+    p.setBrush(Qt::black);
+    p.setPen(Qt::NoPen);
+    p.drawEllipse(leftCircle);
+    p.drawEllipse(rightCircle);
+
+    // Blush under/next to each eye (round & subtle)  //ပါးနီ 
+    QColor blushColor(255, 116, 234, 100); // hot pink with higher transparency
+    p.setBrush(blushColor);
+    p.setPen(Qt::NoPen);
+
+    qreal blushRadius = leftEye.width() * 0.25;
+    qreal blushYOffset = leftEye.height() * 0.2;
+    qreal blushXOffset = leftEye.width() * 0.5;
+
+    // Left blush (circle)
+    QRectF leftBlush(
+        leftEye.center().x() - blushXOffset - blushRadius,
+        leftEye.bottom() - blushRadius - blushYOffset,
+        blushRadius * 2,
+        blushRadius * 2
+    );
+
+    // Right blush (circle)
+    QRectF rightBlush(
+        rightEye.center().x() + blushXOffset - blushRadius,
+        rightEye.bottom() - blushRadius - blushYOffset,
+        blushRadius * 2,
+        blushRadius * 2
+    );
+
+    p.drawEllipse(leftBlush);
+    p.drawEllipse(rightBlush);
+
+}
+
+
+    else {
     drawEye(leftEye, QColor(255, 215, 0));  // gold
     drawEye(rightEye, QColor(255, 215, 0));
 }
@@ -301,6 +384,7 @@ if (isAngry) {
 
 
 }
+
 
 
 void RobotEyes::lookLeft() {
@@ -393,17 +477,29 @@ void RobotEyes::startBlink() {
     }
 }
 
-void RobotEyes::runHappyEyes() {
+void RobotEyes::Smile() {
     isCharging = false;
     isSleeping = false;
     isAngry    = false;
      
     isSmiling = true;
+    isHappy = false;
     allowBlinking = true;
 
     eyeOffset = 0;
     eyeSquash = 0;
     
+}
+
+void RobotEyes::Happy(){
+    isCharging = false;
+    isSleeping = false;
+    isAngry   = false;
+
+    isSmiling = false;
+    isHappy = true;
+
+    allowBlinking = true;
 }
 
 

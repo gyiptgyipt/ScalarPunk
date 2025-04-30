@@ -29,13 +29,14 @@ protected:
 private slots:
     void updateAnimation();
     void startBlink();
-    void runHappyEyes();
+    void Smile();
     void lookLeft();
     void lookRight();
     void wakeUp();
     void goToSleep();
     void Angry();
     void Charging();
+    void Happy();
 private:
     QTimer updateTimer;
     QTimer blinkTimer;
@@ -48,6 +49,7 @@ private:
     bool isSmiling = false;
     bool isAngry = false;
     bool isCharging = false;
+    bool isHappy = false;
    
 
     float eyeOffset = 0.0f;
@@ -61,6 +63,9 @@ private:
 
     float chargingScale = 0.015f;
     bool chargingUp = false;
+
+    float happyShakePhase = 0.0f;
+
 
 
 
