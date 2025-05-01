@@ -345,33 +345,67 @@ if (isAngry) {
     p.drawEllipse(leftCircle);
     p.drawEllipse(rightCircle);
 
-    // Blush under/next to each eye (round & subtle)  //ပါးနီ 
-    QColor blushColor(255, 116, 234, 100); // hot pink with higher transparency
-    p.setBrush(blushColor);
-    p.setPen(Qt::NoPen);
+    // // Blush under/next to each eye (round & subtle)  //ပါးနီ 
+    // QColor blushColor(255, 105, 180, 70); // Barbie pink with softer transparency
 
-    qreal blushRadius = leftEye.width() * 0.25;
-    qreal blushYOffset = leftEye.height() * 0.2;
-    qreal blushXOffset = leftEye.width() * 0.5;
+    // p.setBrush(blushColor);
+    // p.setPen(Qt::NoPen);
 
-    // Left blush (circle)
-    QRectF leftBlush(
-        leftEye.center().x() - blushXOffset - blushRadius,
-        leftEye.bottom() - blushRadius - blushYOffset,
-        blushRadius * 2,
-        blushRadius * 2
+    // qreal blushRadius = leftEye.width() * 0.25;
+    // qreal blushYOffset = leftEye.height() * 0.2;
+    // qreal blushXOffset = leftEye.width() * 0.5;
+
+    // // Left blush (circle)
+    // QRectF leftBlush(
+    //     leftEye.center().x() - blushXOffset - blushRadius,
+    //     leftEye.bottom() - blushRadius - blushYOffset,
+    //     blushRadius * 2,
+    //     blushRadius * 2
+    // );
+
+    // // Right blush (circle)
+    // QRectF rightBlush(
+    //     rightEye.center().x() + blushXOffset - blushRadius,
+    //     rightEye.bottom() - blushRadius - blushYOffset,
+    //     blushRadius * 2,
+    //     blushRadius * 2
+    // );
+
+    // p.drawEllipse(leftBlush);
+    // p.drawEllipse(rightBlush);
+
+        // Anime-style blush: three slanted lines (45 degrees) for each cheek
+    QColor blushColor(255, 0, 180, 120); // Slightly more visible pink
+    QPen blushPen(blushColor, 2, Qt::SolidLine, Qt::RoundCap);
+    p.setPen(blushPen);
+
+    int lineLength = leftEye.width() * 0.15;
+    int lineSpacing = leftEye.width() * 0.07;
+
+    QPointF leftBlushCenter(
+        leftEye.left() - leftEye.width() * 0.2,
+        leftEye.bottom() - leftEye.height() * 0.2
     );
 
-    // Right blush (circle)
-    QRectF rightBlush(
-        rightEye.center().x() + blushXOffset - blushRadius,
-        rightEye.bottom() - blushRadius - blushYOffset,
-        blushRadius * 2,
-        blushRadius * 2
+    QPointF rightBlushCenter(
+        rightEye.right() + rightEye.width() * 0.2,
+        rightEye.bottom() - rightEye.height() * 0.2
     );
 
-    p.drawEllipse(leftBlush);
-    p.drawEllipse(rightBlush);
+    // Draw 3 lines for left blush
+    for (int i = -1; i <= 1; ++i) {
+        QPointF start(leftBlushCenter.x() + i * lineSpacing, leftBlushCenter.y());
+        QPointF end(start.x() + lineLength * 0.7, start.y() + lineLength * 0.7); // 45-degree angle
+        p.drawLine(start, end);
+    }
+
+    // Draw 3 mirrored lines for right blush
+    for (int i = -1; i <= 1; ++i) {
+        QPointF start(rightBlushCenter.x() + i * lineSpacing, rightBlushCenter.y());
+        QPointF end(start.x() - lineLength * 0.7, start.y() + lineLength * 0.7); // mirrored 45-degree
+        p.drawLine(start, end);
+    }
+
 
 }
 
@@ -423,6 +457,7 @@ void RobotEyes::goToSleep() {
     isAngry = false;
     isCharging = false;
     isSmiling = false;
+    isHappy = false;
 
     allowBlinking = false;
 
