@@ -375,36 +375,37 @@ if (isAngry) {
     // p.drawEllipse(rightBlush);
 
         // Anime-style blush: three slanted lines (45 degrees) for each cheek
-    QColor blushColor(255, 0, 180, 120); // Slightly more visible pink
-    QPen blushPen(blushColor, 2, Qt::SolidLine, Qt::RoundCap);
+    QColor blushColor(255, 105, 180, 120); // Barbie pink with soft transparency
+    QPen blushPen(blushColor, 4, Qt::SolidLine, Qt::RoundCap);  // <- thicker
     p.setPen(blushPen);
-
+    
     int lineLength = leftEye.width() * 0.15;
     int lineSpacing = leftEye.width() * 0.07;
-
+    
     QPointF leftBlushCenter(
         leftEye.left() - leftEye.width() * 0.2,
         leftEye.bottom() - leftEye.height() * 0.2
     );
-
+    
     QPointF rightBlushCenter(
         rightEye.right() + rightEye.width() * 0.2,
         rightEye.bottom() - rightEye.height() * 0.2
     );
-
-    // Draw 3 lines for left blush
+    
+    // Left blush lines
     for (int i = -1; i <= 1; ++i) {
         QPointF start(leftBlushCenter.x() + i * lineSpacing, leftBlushCenter.y());
-        QPointF end(start.x() + lineLength * 0.7, start.y() + lineLength * 0.7); // 45-degree angle
+        QPointF end(start.x() + lineLength * 0.7, start.y() + lineLength * 0.7);
+        p.drawLine(start, end);
+    }
+    
+    // Right blush lines (mirrored)
+    for (int i = -1; i <= 1; ++i) {
+        QPointF start(rightBlushCenter.x() + i * lineSpacing, rightBlushCenter.y());
+        QPointF end(start.x() - lineLength * 0.7, start.y() + lineLength * 0.7);
         p.drawLine(start, end);
     }
 
-    // Draw 3 mirrored lines for right blush
-    for (int i = -1; i <= 1; ++i) {
-        QPointF start(rightBlushCenter.x() + i * lineSpacing, rightBlushCenter.y());
-        QPointF end(start.x() - lineLength * 0.7, start.y() + lineLength * 0.7); // mirrored 45-degree
-        p.drawLine(start, end);
-    }
 
 
 }
