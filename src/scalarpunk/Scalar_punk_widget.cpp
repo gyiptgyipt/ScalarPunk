@@ -113,13 +113,10 @@ RobotEyes::RobotEyes(QWidget *parent) : QWidget(parent) {
         }
     }
 );
-
-    
     // Create a thread to spin ROS node in the background
     ros_spin_thread = std::thread([this]() {
         rclcpp::spin(node);
     });
-
 
 
 }
@@ -171,8 +168,8 @@ void RobotEyes::updateAnimation() {
 
 
     if (isCrying) {
-    tearOffset += 1.5;
-    if (tearOffset > 20) tearOffset = 0;
+    tearOffset += 0.5;
+    if (tearOffset > 80) tearOffset = 0;
 }
 
 
@@ -404,14 +401,14 @@ if (isAngry) {
     );
     
     // Left blush lines
-    for (int i = -1; i <= 1; ++i) {
+    for (int i = 0; i <= 2; ++i) {
         QPointF start(leftBlushCenter.x() + i * lineSpacing, leftBlushCenter.y());
         QPointF end(start.x() + lineLength * 0.7, start.y() + lineLength * 0.7);
         p.drawLine(start, end);
     }
     
     // Right blush lines (mirrored)
-    for (int i = -1; i <= 1; ++i) {
+    for (int i = 0; i <= 2; ++i) {
         QPointF start(rightBlushCenter.x() + i * lineSpacing, rightBlushCenter.y());
         QPointF end(start.x() - lineLength * 0.7, start.y() + lineLength * 0.7);
         p.drawLine(start, end);
@@ -419,30 +416,53 @@ if (isAngry) {
   
 }   //end happy
 
-if (isCrying) {
-    // Blue-tinted sad eyes
-    drawEye(leftEye, QColor(100, 180, 255));  // soft blue
-    drawEye(rightEye, QColor(100, 180, 255));
+else if (isCrying) {
+   
+   // Eye base (yellow rectangle)
+    drawEye(leftEye, QColor(255, 215, 0));   // gold
+    drawEye(rightEye, QColor(255, 215, 0));
 
-    // Draw tear drops (small blue circles falling from each eye)
-    qreal tearRadius = 6.0;
-    QPointF leftTearStart(leftEye.center().x(), leftEye.bottom() + 5 + tearOffset);
-    QPointF rightTearStart(rightEye.center().x(), rightEye.bottom() + 5 + tearOffset);
-
-    p.setBrush(QColor(150, 200, 255));
+    // Black "closed eyelid" triangle overlay
+    p.setBrush(Qt::black);
     p.setPen(Qt::NoPen);
-    p.drawEllipse(leftTearStart, tearRadius, tearRadius * 1.2);
-    p.drawEllipse(rightTearStart, tearRadius, tearRadius * 1.2);
+
+    // Left eye black triangle (top-left cover)
+    QPolygonF leftEyelid;
+    leftEyelid << QPointF(leftEye.left(), leftEye.top())
+               << QPointF(leftEye.right(), leftEye.top())
+               << QPointF(leftEye.left(), leftEye.bottom() - leftEye.height() * 0.6);
+    p.drawPolygon(leftEyelid);
+
+    // Right eye black triangle (top-right cover)
+    QPolygonF rightEyelid;
+    rightEyelid << QPointF(rightEye.right(), rightEye.top())
+                << QPointF(rightEye.left(), rightEye.top())
+                << QPointF(rightEye.right(), rightEye.bottom() - rightEye.height() * 0.6);
+    p.drawPolygon(rightEyelid);
+   
+    QFont emojiFont("Segoe UI Emoji");
+    emojiFont.setPointSize(20);
+    p.setFont(emojiFont);
+    p.setPen(QColor(100, 160, 255));  // Light blue
+
+    QString tearEmoji = "💧";
+
+    QPointF leftTearStart(leftEye.center().x()  , leftEye.bottom() + 5 + tearOffset);
+    QPointF rightTearStart(rightEye.center().x() , rightEye.bottom() + 5 + tearOffset);
+
+    p.drawText(leftTearStart, tearEmoji);
+    p.drawText(rightTearStart, tearEmoji);
 
     // Frowning brow
     p.setPen(QPen(Qt::black, 3));
-    QPointF frownLeft(leftEye.left(), leftEye.top() - 10);
-    QPointF frownRight(rightEye.right(), rightEye.top() - 10);
+    QPointF frownLeft(leftEye.left(), leftEye.top() - 20);
+    QPointF frownRight(rightEye.right(), rightEye.top() - 20);
     QPointF frownCenter(rect().center().x(), leftEye.top() + 5);
     QPolygonF frown;
     frown << frownLeft << frownCenter << frownRight;
     p.drawPolyline(frown);
 }
+
 
 
 
@@ -456,6 +476,7 @@ if (isCrying) {
 }
 
 
+// true , false parameter တွေပြန်စစ်ရန်
 
 void RobotEyes::lookLeft() {
 
@@ -583,6 +604,9 @@ void RobotEyes::Happy(){
     isHappy = true;
 
     allowBlinking = true;
+
+    eyeOffset = 0;
+    eyeSquash = 0;
 }
 
 void RobotEyes::Cry(){
@@ -595,6 +619,8 @@ void RobotEyes::Cry(){
     isHappy = false;
     isCrying = true;
 
+    eyeOffset = 0;
+    eyeSquash = 0;
 
 }
 
