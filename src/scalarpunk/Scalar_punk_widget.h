@@ -37,6 +37,7 @@ private slots:
     void Angry();
     void Charging();
     void Happy();
+    void Cry();
 private:
     QTimer updateTimer;
     QTimer blinkTimer;
@@ -65,6 +66,10 @@ private:
     bool chargingUp = false;
 
     float happyShakePhase = 0.0f;
+
+    bool isCrying = false;
+    float tearOffset = 0.0f;
+
 
 
 

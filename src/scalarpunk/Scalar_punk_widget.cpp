@@ -41,6 +41,7 @@ RobotEyes::RobotEyes(QWidget *parent) : QWidget(parent) {
         [&]() { Angry(); } ,
         [&]() { Charging(); } ,
         [&]() { Happy(); } ,
+        [&]() { Cry(); } ,
         [&]() { goToSleep(); }  
     };
 
@@ -104,6 +105,9 @@ RobotEyes::RobotEyes(QWidget *parent) : QWidget(parent) {
         } else if (emotion == "happy") {
             Happy();
             response->status = "success";
+        } else if (emotion == "cry") {
+            Cry();
+            response->status = "success";
         }    else {
             response->status = "fail";
         }
@@ -164,6 +168,13 @@ void RobotEyes::updateAnimation() {
         happyShakePhase -= 2 * M_PI;
     }
 }
+
+
+    if (isCrying) {
+    tearOffset += 1.5;
+    if (tearOffset > 20) tearOffset = 0;
+}
+
 
     update();
 }
@@ -405,10 +416,34 @@ if (isAngry) {
         QPointF end(start.x() - lineLength * 0.7, start.y() + lineLength * 0.7);
         p.drawLine(start, end);
     }
+  
+}   //end happy
 
+if (isCrying) {
+    // Blue-tinted sad eyes
+    drawEye(leftEye, QColor(100, 180, 255));  // soft blue
+    drawEye(rightEye, QColor(100, 180, 255));
 
+    // Draw tear drops (small blue circles falling from each eye)
+    qreal tearRadius = 6.0;
+    QPointF leftTearStart(leftEye.center().x(), leftEye.bottom() + 5 + tearOffset);
+    QPointF rightTearStart(rightEye.center().x(), rightEye.bottom() + 5 + tearOffset);
 
+    p.setBrush(QColor(150, 200, 255));
+    p.setPen(Qt::NoPen);
+    p.drawEllipse(leftTearStart, tearRadius, tearRadius * 1.2);
+    p.drawEllipse(rightTearStart, tearRadius, tearRadius * 1.2);
+
+    // Frowning brow
+    p.setPen(QPen(Qt::black, 3));
+    QPointF frownLeft(leftEye.left(), leftEye.top() - 10);
+    QPointF frownRight(rightEye.right(), rightEye.top() - 10);
+    QPointF frownCenter(rect().center().x(), leftEye.top() + 5);
+    QPolygonF frown;
+    frown << frownLeft << frownCenter << frownRight;
+    p.drawPolyline(frown);
 }
+
 
 
     else {
@@ -427,6 +462,8 @@ void RobotEyes::lookLeft() {
     isCharging = false;
     isSleeping = false;
     isAngry    = false;
+    isCrying = false;
+    isHappy = false;
      
     isSmiling = true;
     allowBlinking = true;
@@ -442,6 +479,8 @@ void RobotEyes::lookRight() {
     isCharging = false;
     isSleeping = false;
     isAngry    = false;
+    isCrying = false;
+    isHappy = false;
      
     isSmiling = true;
     allowBlinking = true;
@@ -459,6 +498,7 @@ void RobotEyes::goToSleep() {
     isCharging = false;
     isSmiling = false;
     isHappy = false;
+    isCrying = false;
 
     allowBlinking = false;
 
@@ -473,6 +513,8 @@ void RobotEyes::wakeUp() {
     isAngry = false;
     isCharging = false;
     isSmiling = false;
+    isCrying = false;
+    isHappy = false;
    
     allowBlinking = true;
 
@@ -487,6 +529,8 @@ void RobotEyes::Angry() {
     isCharging = false;
    
     isSmiling = false;
+    isCrying = false;
+    isHappy = false;
     allowBlinking = true;
 
     eyeOffset = 0;
@@ -499,6 +543,7 @@ void RobotEyes::Charging() {
     isAngry    = false;
      
     isSmiling = false;
+    isCrying = false;
     allowBlinking = true;
 
     eyeOffset = 0;
@@ -517,6 +562,7 @@ void RobotEyes::Smile() {
     isCharging = false;
     isSleeping = false;
     isAngry    = false;
+    isCrying = false;
      
     isSmiling = true;
     isHappy = false;
@@ -533,9 +579,23 @@ void RobotEyes::Happy(){
     isAngry   = false;
 
     isSmiling = false;
+    isCrying = false;
     isHappy = true;
 
     allowBlinking = true;
+}
+
+void RobotEyes::Cry(){
+
+    isCharging = false;
+    isSleeping = false;
+    isAngry   = false;
+
+    isSmiling = false;
+    isHappy = false;
+    isCrying = true;
+
+
 }
 
 
