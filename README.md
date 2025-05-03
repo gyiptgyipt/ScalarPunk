@@ -1,7 +1,21 @@
 # Scalar_Punk
-Robot eyes emotions that can control by ros2 topic
+Robot eyes emotions that can control by ros2 service
 
--build in your work space
+
+-Clone in your work space 
+```
+git clone https://github.com/gyiptgyipt/ScalarPunk.git
+```
+
+-And build
+```
+colcon build
+```
+
+```
+source install/setup.bash
+```
+
 and run the node 
 
 ```
@@ -13,6 +27,13 @@ Command for servicec call for test
 <!-- ```
 ros2 topic pub -r 1 /robot_emotion std_msgs/msg/String "data: 'angry'" --once
 ``` -->
+
+eg. 
 ```
 ros2 service call /robot_emotion_command scalarpunk_interfaces/srv/EmotionCommand "{emotion: 'happy'}"
 ```
+
+
+
+
+TODO: adaptive Animation size and ratio of squircle

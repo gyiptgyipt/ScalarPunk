@@ -14,7 +14,7 @@
 
 
 RobotEyes::RobotEyes(QWidget *parent) : QWidget(parent) {
-    setFixedSize(800, 400);
+    setFixedSize(1980, 1020);  // default 800 400
 
     connect(&updateTimer, &QTimer::timeout, this, &RobotEyes::updateAnimation);
     updateTimer.start(16);  // ~60 FPS
@@ -322,7 +322,7 @@ if (isAngry) {
     p.drawText(emojiPos, emoji);
 
 } else if (isHappy) {
-    qreal shakeX = qSin(happyShakePhase) * 5.0f; // amplitude of shake      //မှတ်ချက် ပျော်နေတဲ့ပုံ မပေါက်၊  ကြောက်နေတဲ့ပုံ ပေါက် xD
+    qreal shakeX = qSin(happyShakePhase) * 5.0f; // amplitude of shake      
 
     // Apply shake offset
     leftEye.translate(shakeX, 0);
@@ -353,7 +353,7 @@ if (isAngry) {
     p.drawEllipse(leftCircle);
     p.drawEllipse(rightCircle);
 
-    // // Blush under/next to each eye (round & subtle)  //ပါးနီ 
+    // // Blush under/next to each eye (round & subtle)  //ပါးနီ  //မှတ်ချက် ပျော်နေတဲ့ပုံ မပေါက်၊  ကြောက်နေတဲ့ပုံ ပေါက် xD
     // QColor blushColor(255, 105, 180, 70); // Barbie pink with softer transparency
 
     // p.setBrush(blushColor);
@@ -447,7 +447,7 @@ else if (isCrying) {
 
     QString tearEmoji = "💧";
 
-    QPointF leftTearStart(leftEye.center().x()  , leftEye.bottom() + 5 + tearOffset);
+    QPointF leftTearStart(leftEye.center().x()  , leftEye.bottom() + 5 + tearOffset);         // pos ချိန်ရန်
     QPointF rightTearStart(rightEye.center().x() , rightEye.bottom() + 5 + tearOffset);
 
     p.drawText(leftTearStart, tearEmoji);
@@ -483,10 +483,11 @@ void RobotEyes::lookLeft() {
     isCharging = false;
     isSleeping = false;
     isAngry    = false;
+
     isCrying = false;
     isHappy = false;
-     
     isSmiling = true;
+
     allowBlinking = true;
 
     eyeOffset = -100;
@@ -500,10 +501,11 @@ void RobotEyes::lookRight() {
     isCharging = false;
     isSleeping = false;
     isAngry    = false;
+
     isCrying = false;
     isHappy = false;
-     
     isSmiling = true;
+
     allowBlinking = true;
     
     eyeOffset = 100;
@@ -517,6 +519,7 @@ void RobotEyes::goToSleep() {
     isSleeping = true;
     isAngry = false;
     isCharging = false;
+
     isSmiling = false;
     isHappy = false;
     isCrying = false;
@@ -533,6 +536,7 @@ void RobotEyes::wakeUp() {
     isSleeping = false;
     isAngry = false;
     isCharging = false;
+
     isSmiling = false;
     isCrying = false;
     isHappy = false;
@@ -552,6 +556,7 @@ void RobotEyes::Angry() {
     isSmiling = false;
     isCrying = false;
     isHappy = false;
+
     allowBlinking = true;
 
     eyeOffset = 0;
@@ -564,7 +569,9 @@ void RobotEyes::Charging() {
     isAngry    = false;
      
     isSmiling = false;
+    isHappy = false;
     isCrying = false;
+
     allowBlinking = true;
 
     eyeOffset = 0;
@@ -587,6 +594,7 @@ void RobotEyes::Smile() {
      
     isSmiling = true;
     isHappy = false;
+
     allowBlinking = true;
 
     eyeOffset = 0;
@@ -618,6 +626,8 @@ void RobotEyes::Cry(){
     isSmiling = false;
     isHappy = false;
     isCrying = true;
+
+    allowBlinking = true;
 
     eyeOffset = 0;
     eyeSquash = 0;

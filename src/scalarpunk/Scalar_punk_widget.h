@@ -43,7 +43,7 @@ private:
     QTimer blinkTimer;
     QTimer actionTimer;
 
-    float blinkProgress = 0.0f;
+    
     bool isBlinking = true;
     bool allowBlinking = true;
     bool isSleeping = false;
@@ -53,6 +53,8 @@ private:
     bool isHappy = false;
    
 
+    float blinkProgress = 0.0f;
+    
     float eyeOffset = 0.0f;
     float eyeSquash = 0.0f;  // negative for left shrink, positive for right shrink
 
