@@ -74,6 +74,10 @@ private:
 
 
 
+    QTimer driftTimer;  // moment_eyes
+    qreal eyeDriftX = 0;
+    qreal eyeDriftY = 0;
+    bool movement_eyes = false;
 
 
 

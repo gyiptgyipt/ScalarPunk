@@ -22,6 +22,26 @@ RobotEyes::RobotEyes(QWidget *parent) : QWidget(parent) {
     connect(&blinkTimer, &QTimer::timeout, this, &RobotEyes::startBlink);
     blinkTimer.start(3000 + QRandomGenerator::global()->bounded(2000));
 
+    
+    driftTimer.setInterval(2000);  // <- Adjust speed here: 100 = fast, 500 = slow
+        connect(&driftTimer, &QTimer::timeout, this, [this]() {                  
+            if (movement_eyes) {
+                int randomX = QRandomGenerator::global()->bounded( width() * (-1)  , width());
+                int randomY = QRandomGenerator::global()->bounded( height() * (-1) , height());
+                eyeDriftX = randomX * 0.1;                 // widget dimension ရဲ့ 10 ပုံ တစ်ပုံ
+                eyeDriftY = randomY * 0.1;
+            } else {
+                eyeDriftX = 0;
+                eyeDriftY = 0;
+            }
+        });
+        driftTimer.start();
+
+
+    wakeUp();
+
+
+
     // connect(&actionTimer, &QTimer::timeout, this, &RobotEyes::nextAnimation);
     // actionTimer.start(3000); // Switch animation every 3s
 
@@ -250,14 +270,17 @@ auto drawEye = [&](const QRectF &rect, const QColor &eyeColor) {
     p.setBrush(eyeColor);
     p.setPen(Qt::black);
 
+
+    QRectF movedRect = rect.translated(eyeDriftX, eyeDriftY);
+
     qreal radiusX = rect.width() / 3.0;
     qreal radiusY = rect.height() / 3.0;
 
-    p.drawRoundedRect(rect, radiusX, radiusY);
-    
+    p.drawRoundedRect(movedRect, radiusX, radiusY);
+
     // Blink effect
     if (blinkAmount > 0.0f) {
-        QRectF lid(rect.left(), rect.top(), rect.width(), (rect.height() - 10) * blinkAmount);
+        QRectF lid(movedRect.left(), movedRect.top(), movedRect.width(), (movedRect.height() - 10) * blinkAmount);
         p.setBrush(Qt::black);
         p.setPen(Qt::NoPen);
         p.drawRoundedRect(lid, 30, 30);
@@ -265,15 +288,16 @@ auto drawEye = [&](const QRectF &rect, const QColor &eyeColor) {
 
     if (isSmiling) {
         QRectF mouthRect(
-            rect.left(),
-            rect.bottom() - rect.height() * 0.4,
-            rect.width(),
-            rect.height() * 0.4
+            movedRect.left(),
+            movedRect.bottom() - movedRect.height() * 0.4,
+            movedRect.width(),
+            movedRect.height() * 0.4
         );
         p.setBrush(Qt::black);
         p.drawRect(mouthRect);
     }
 };
+
 
 // Now you can safely call drawEye anywhere below:
 if (isAngry) {
@@ -530,6 +554,7 @@ void RobotEyes::goToSleep() {
 
     allowBlinking = false;
 
+    movement_eyes = false;
     eyeOffset = 0;
     eyeSquash = 0;
     
@@ -547,6 +572,7 @@ void RobotEyes::wakeUp() {
    
     allowBlinking = true;
 
+    movement_eyes = true;
     eyeOffset = 0;
     eyeSquash = 0;
     
@@ -563,6 +589,7 @@ void RobotEyes::Angry() {
 
     allowBlinking = true;
 
+    movement_eyes = false;
     eyeOffset = 0;
     eyeSquash = 0;
 }
@@ -578,6 +605,7 @@ void RobotEyes::Charging() {
 
     allowBlinking = true;
 
+    movement_eyes = true;
     eyeOffset = 0;
     eyeSquash = 0;
    
@@ -601,6 +629,7 @@ void RobotEyes::Smile() {
 
     allowBlinking = true;
 
+    movement_eyes = false;
     eyeOffset = 0;
     eyeSquash = 0;
     
@@ -617,6 +646,7 @@ void RobotEyes::Happy(){
 
     allowBlinking = true;
 
+    movement_eyes = false;
     eyeOffset = 0;
     eyeSquash = 0;
 }
@@ -633,6 +663,7 @@ void RobotEyes::Cry(){
 
     allowBlinking = true;
 
+    movement_eyes = false;
     eyeOffset = 0;
     eyeSquash = 0;
 
