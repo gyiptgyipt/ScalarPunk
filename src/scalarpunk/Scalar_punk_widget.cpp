@@ -14,7 +14,7 @@
 
 
 RobotEyes::RobotEyes(QWidget *parent) : QWidget(parent) {
-    setFixedSize(1980, 1020);  // default 800 400
+    setFixedSize(800, 400);  // default 800 400
 
     connect(&updateTimer, &QTimer::timeout, this, &RobotEyes::updateAnimation);
     updateTimer.start(16);  // ~60 FPS
@@ -249,7 +249,11 @@ QRectF rightEye(leftX + leftEyeWidth + spacing, topY, rightEyeWidth, eyeHeight);
 auto drawEye = [&](const QRectF &rect, const QColor &eyeColor) {
     p.setBrush(eyeColor);
     p.setPen(Qt::black);
-    p.drawRoundedRect(rect, 60, 60);
+
+    qreal radiusX = rect.width() / 3.0;
+    qreal radiusY = rect.height() / 3.0;
+
+    p.drawRoundedRect(rect, radiusX, radiusY);
     
     // Blink effect
     if (blinkAmount > 0.0f) {
