@@ -36,4 +36,4 @@ ros2 service call /robot_emotion_command scalarpunk_interfaces/srv/EmotionComman
 
 
 
-TODO: adaptive Animation size and ratio of squircle
+TODO: adaptive Animation size
