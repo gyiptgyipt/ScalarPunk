@@ -168,7 +168,7 @@ void RobotEyes::updateAnimation() {
 
     // Animate "Zzz" rising effect
     if (isSleeping) {
-        zzzY -= 0.5f;             // Move upward
+        zzzY -= 1.0f;             // Move upward
         zzzOpacity -= 0.005f;      // Fade out
 
         // Reset loop when it fades away
@@ -249,7 +249,7 @@ QRectF rightEye(leftX + leftEyeWidth + spacing, topY, rightEyeWidth, eyeHeight);
     if (isSleeping) {
         blinkAmount = 1.0f;
         QFont font = p.font();
-        font.setPointSize(32);
+        font.setPointSize(leftEye.height() * 0.2);
         font.setBold(true);
         p.setFont(font);
 
@@ -469,7 +469,7 @@ else if (isCrying) {
     p.drawPolygon(rightEyelid);
    
     QFont emojiFont("Segoe UI Emoji");
-    emojiFont.setPointSize(20);
+    emojiFont.setPointSizeF(leftEye.height() * 0.2);  // or use rect.height() * 0.08
     p.setFont(emojiFont);
     p.setPen(QColor(100, 160, 255));  // Light blue
 

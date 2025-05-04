@@ -36,4 +36,4 @@ ros2 service call /robot_emotion_command scalarpunk_interfaces/srv/EmotionComman
 
 
 
-TODO: adaptive Animation size
+TODO: Clean Code
