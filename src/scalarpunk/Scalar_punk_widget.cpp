@@ -16,6 +16,9 @@
 RobotEyes::RobotEyes(QWidget *parent) : QWidget(parent) {
     setFixedSize(800, 400);  // default 800 400
 
+    setWindowFlags(Qt::FramelessWindowHint | Qt::Window);
+
+
     connect(&updateTimer, &QTimer::timeout, this, &RobotEyes::updateAnimation);
     updateTimer.start(16);  // ~60 FPS
 
@@ -668,6 +671,13 @@ void RobotEyes::Cry(){
     eyeSquash = 0;
 
 }
+
+
+void RobotEyes::mousePressEvent(QMouseEvent *event) {   //click to exit
+    Q_UNUSED(event);
+    close();  // or qApp->quit(); to exit the whole app
+}
+
 
 
 void RobotEyes::nextAnimation() {
