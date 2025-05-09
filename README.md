@@ -34,7 +34,7 @@ ros2 service call /robot_emotion_command scalarpunk_interfaces/srv/EmotionComman
 ```
 
 emotions that included:
-![Emotions_Example][/images/emotions.jpg]
+![Emotions_Example](/images/emotions.jpg)
 
 
 TODO: Clean Code
