@@ -33,7 +33,8 @@ eg.
 ros2 service call /robot_emotion_command scalarpunk_interfaces/srv/EmotionCommand "{emotion: 'happy'}"
 ```
 
-
+emotions that included:
+![Emotions_Example][/images/emotions.jpg]
 
 
 TODO: Clean Code
