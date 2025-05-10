@@ -35,7 +35,14 @@ ros2 service call /robot_emotion_command scalarpunk_interfaces/srv/EmotionComman
 
 Emotion Lists (to add)
 ```
-IDLE
+happy
+angry
+look_left
+look_right
+charging
+smile
+cry
+wakeup
 ```
 
 
