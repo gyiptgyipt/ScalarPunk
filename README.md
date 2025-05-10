@@ -33,7 +33,7 @@ eg.
 ros2 service call /robot_emotion_command scalarpunk_interfaces/srv/EmotionCommand "{emotion: 'happy'}"
 ```
 
-Emotion Lists (to add)
+Emotion Parameter list that can use: 
 ```
 happy
 angry
